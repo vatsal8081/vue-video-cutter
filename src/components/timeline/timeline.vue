@@ -1,11 +1,12 @@
 <template>
-  <div>
-    <div>
+  <div class="video-time-details-wrap">
+    <div class="video-time-details">
       <ul>
         <li v-for="(item, i) in intervalsData" :key="i">
           {{ item }}
         </li>
       </ul>
+      <div class="video-current-time"></div>
     </div>
   </div>
 </template>

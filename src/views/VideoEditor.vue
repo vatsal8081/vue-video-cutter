@@ -1,63 +1,78 @@
 <template>
   <div>
-    <div v-dragscroll="true">
+    <div class="video-main-wrap" v-dragscroll="true">
       <!-- tracks component -->
-      <div>
+      <div class="video-track-details-wrap">
         <!-- track left bar -->
-        <div v-for="(track, i) in tracksData" :key="i">
-          <span>V01</span>
-          <i class="fas fa-angle-up"></i>
-          <i class="fas fa-angle-down"></i>
-          <!-- <button @click="removeTrack(i)">minus</button> -->
-          <div @click="removeTrack(i)">
-            <i class="fas fa-minus"></i>
+        <div class="video-track-info-wrap">
+          <div class="video-track-info">
+            <div class="video-track-left-controls">
+              <div
+                class="video-track-controls"
+                v-for="(track, i) in tracksData"
+                :key="i"
+              >
+                <div class="video-track-title current-track">V01</div>
+                <div class="video-swap-btn-wrap">
+                  <i class="fas fa-angle-up"></i>
+                  <i class="fas fa-angle-down"></i>
+                </div>
+                <div class="video-remove-btn" @click="removeTrack(i)">
+                  <i class="fas fa-minus"></i>
+                </div>
+              </div>
+            </div>
+            <div class="video-track-details">
+              <div
+                class="video-current-track"
+                v-for="(track, i) in tracksData"
+                :key="i"
+              ></div>
+            </div>
+          </div>
+          <div class="video-track-left-controls">
+            <div class="video-track-add" @click="addTrack">
+              <i class="fas fa-plus"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- track left bar -->
+      </div>
+      <!-- tracks component -->
+      <div class="video-timer-wrap">
+        <!-- change interval -->
+        <div class="video-timer-btn-wrap">
+          <div
+            class="video-timer-btn"
+            @click="isChangingInterval = !isChangingInterval"
+          >
+            <i class="far fa-clock"></i>
           </div>
 
-          <!-- single track section -->
-          <div>single track {{ i }}</div>
-          <!-- single track section -->
+          <!-- <p v-if="isChangingInterval">dvdfgdfgdfg</p> -->
+          <div div v-if="isChangingInterval" class="video-timer">
+            <span>H</span>
+            <input type="number" v-model="inputInterval.hours" />
+            <span>M</span>
+            <input type="number" v-model="inputInterval.minutes" />
+            <span>S</span>
+            <input type="number" v-model="inputInterval.seconds" />
+            <span>MS</span>
+            <input type="number" v-model="inputInterval.milliseconds" />
+            <button @click="changeInterval">Set</button>
+          </div>
         </div>
-
-        <!-- <button @click="addTrack">Plus</button> -->
-        <div @click="addTrack">
-          <i class="fas fa-plus"></i>
-        </div>
-
-        <!-- track left bar -->
+        <!-- change interval -->
+        <!-- timeline component -->
+        <timeLine
+          v-dragscroll.x="true"
+          startTime="00:00:00:00"
+          endTime="00:01:00:00"
+          :interVal="interval"
+        ></timeLine>
+        <!-- timeline component -->
       </div>
-      <!-- tracks component -->
-
-      <!-- timeline component -->
-      <timeLine
-        v-dragscroll.x="true"
-        startTime="00:00:00:00"
-        endTime="00:01:00:00"
-        :interVal="interval"
-      ></timeLine>
-      <!-- timeline component -->
-
-      <!-- change interval -->
-      <div>
-        <div
-          v-if="!isChangingInterval"
-          @click="isChangingInterval = !isChangingInterval"
-        >
-          <i class="far fa-clock"></i>
-        </div>
-
-        <div v-if="isChangingInterval">
-          <span>H</span>
-          <input type="number" v-model="inputInterval.hours" />
-          <span>M</span>
-          <input type="number" v-model="inputInterval.minutes" />
-          <span>S</span>
-          <input type="number" v-model="inputInterval.seconds" />
-          <span>MS</span>
-          <input type="number" v-model="inputInterval.milliseconds" />
-          <button @click="changeInterval">Set</button>
-        </div>
-      </div>
-      <!-- change interval -->
     </div>
   </div>
 </template>
@@ -111,4 +126,235 @@ export default {
 </script>
 
 <style lang="scss">
+.video-timer-wrap {
+  display: flex;
+  width: 100%;
+}
+
+.video-timer-btn-wrap {
+  width: 100px;
+}
+
+.video-time-details-wrap {
+  width: calc(100% - 100px);
+  display: flex;
+}
+
+.video-timer {
+  background-color: rgba(154, 154, 154, 0.5);
+  padding: 10px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0px;
+  top: 0px;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+}
+
+.video-timer svg path {
+  fill: #fff;
+}
+.video-time-details ul {
+  display: flex;
+  margin-top: 0px;
+  margin-bottom: 0;
+  height: 40px;
+  align-items: center;
+  padding-left: 0;
+  position: relative;
+  z-index: 2;
+}
+.video-time-details ul:after {
+  content: "";
+  width: 100%;
+  height: calc(100% - 2px);
+  border: 1px solid #949494;
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-left: 0px;
+}
+
+.video-timer-btn {
+  background-color: #ababab;
+  padding: 10px;
+  box-shadow: inset 0 0 4px 0px #545454;
+  border: 1px solid #949494;
+}
+
+.video-timer-btn svg path {
+  fill: #fff;
+}
+
+.video-time-details {
+  overflow-x: auto;
+  background-color: #ababab;
+  display: flex;
+  position: relative;
+  box-shadow: inset -3px 0px 4px 0px #545454;
+  width: 100%;
+}
+
+.video-time-details ul li {
+  display: inline-block;
+  width: 147px;
+  color: #ffffff;
+}
+.video-current-time {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  background-color: #ccc;
+  width: 25%;
+  z-index: 1;
+}
+
+.video-track-left-controls {
+  width: 100px;
+  background-color: #b7b7b7;
+  padding-bottom: 90px;
+}
+.video-track-add:first-child {
+  margin-top: -4px;
+}
+.video-track-details {
+  width: calc(100% - 100px);
+  background-color: #b7b7b7;
+}
+
+.video-track-details-wrap {
+  display: flex;
+  min-height: 150px;
+}
+
+.video-track-controls {
+  display: flex;
+  min-height: 50px;
+  margin-top: -2px;
+}
+
+.video-track-title {
+  width: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 4px 0px #545454;
+  background-color: #ababab;
+  color: #fff;
+  border-right: 0px;
+}
+.video-track-title.current-track {
+  background-color: #192356;
+}
+.video-swap-btn-wrap {
+  display: flex;
+  flex-flow: column;
+  width: 22px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 4px 0px #545454;
+  border: 1px solid #949494;
+  background-color: #ababab;
+  border-left: 0;
+  border-right: 0pc;
+}
+
+body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+}
+
+.video-remove-btn {
+  display: flex;
+  width: 22px;
+  align-items: center;
+  box-shadow: inset 0 0 4px 0px #545454;
+  border: 1px solid #949494;
+  background-color: #ababab;
+  justify-content: center;
+  color: #fff;
+  border-left: 0px;
+  border-right: 0px;
+  cursor: pointer;
+}
+
+.video-swap-btn-wrap svg path {
+  fill: #fff;
+}
+
+.video-swap-btn-wrap svg:first-child {
+  border-bottom: 1px solid #949494;
+}
+
+.video-remove-btn .svg-inline--fa.fa-w-14 {
+  width: 10px;
+}
+
+.video-track-add {
+  box-shadow: inset 0 0 4px 0px #545454;
+  background-color: #ababab;
+  justify-content: center;
+  margin-top: -2px;
+  padding-top: 8px;
+  padding-bottom: 10px;
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  border-right: 0px;
+  cursor: pointer;
+}
+.video-track-add svg path {
+  fill: #fff;
+}
+.video-current-track {
+  min-height: 48px;
+  box-shadow: inset 0 0 4px 0px #565656;
+  background-color: #848484;
+}
+.video-timer input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 0;
+  margin-bottom: 13px;
+}
+
+.video-timer button {
+  background-color: #7d7d7d;
+  font-size: 18px;
+  width: 140px;
+  border: 0;
+  padding: 7px;
+  color: #fff;
+  border-radius: 36px;
+  cursor: pointer;
+}
+
+.video-timer button:hover {
+  background-color: #9a9a9a;
+}
+.video-main-wrap {
+  margin-bottom: 20px;
+}
+.video-track-info-wrap {
+  width: 100%;
+  background-color: #b7b7b7;
+}
+
+.video-track-info {
+  display: flex;
+}
+.video-track-info .video-track-left-controls {
+  padding-bottom: 0px;
+}
+.video-track-left-controls.video-track-not-show {
+  margin-top: -52px;
+  position: relative;
+}
 </style>
