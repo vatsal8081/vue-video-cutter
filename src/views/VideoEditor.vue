@@ -27,7 +27,13 @@
                 class="video-current-track"
                 v-for="(track, i) in tracksData"
                 :key="i"
-              ></div>
+              >
+                <input type="file" @change="prevFile" />
+                <audio controls>
+                  <source src="horse.mp3" type="audio/mpeg" />
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
             </div>
           </div>
           <div class="video-track-left-controls">
@@ -89,6 +95,7 @@ export default {
 
   data() {
     return {
+      tmp: "",
       isChangingInterval: false,
       inputInterval: {
         hours: "00",
@@ -120,6 +127,10 @@ export default {
     removeTrack(i) {
       console.log("i is", i);
       this.tracksData.splice(i, 1);
+    },
+
+    prevFile(event) {
+      console.log("audio ", event.target.files);
     },
   },
 };
