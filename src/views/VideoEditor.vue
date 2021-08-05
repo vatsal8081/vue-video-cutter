@@ -18,7 +18,7 @@
                   <i class="fas fa-angle-down"></i>
                 </div>
                 <div class="video-remove-btn" @click="removeTrack(i)">
-                  <i class="fas fa-minus"></i>
+                  <i class="far fa-trash-alt"></i>
                 </div>
               </div>
             </div>
@@ -183,7 +183,7 @@ export default {
   content: "";
   width: 100%;
   height: calc(100% - 2px);
-  border: 1px solid #949494;
+  border: 1px solid #f8b064;
   position: absolute;
   left: 0;
   right: 0;
@@ -191,10 +191,10 @@ export default {
 }
 
 .video-timer-btn {
-  background-color: #ababab;
+  background-color: #fe955b;
   padding: 10px;
-  box-shadow: inset 0 0 4px 0px #545454;
-  border: 1px solid #949494;
+  box-shadow: inset 0 0 4px 0px #c7913b;
+  border: 1px solid #f8b064;
 }
 
 .video-timer-btn svg path {
@@ -203,10 +203,10 @@ export default {
 
 .video-time-details {
   overflow-x: auto;
-  background-color: #ababab;
+  background-color: #fe955b;
   display: flex;
   position: relative;
-  box-shadow: inset -3px 0px 4px 0px #545454;
+  box-shadow: inset 0 0 4px 0px #c7913b;
   width: 100%;
 }
 
@@ -221,22 +221,23 @@ export default {
   top: 0;
   bottom: 0;
   height: 100%;
-  background-color: #ccc;
+  background-color: #f9c78e;
   width: 25%;
   z-index: 1;
+      opacity: 0.5;
 }
 
 .video-track-left-controls {
   width: 100px;
-  background-color: #b7b7b7;
+  background-color: #f7bb74;
   padding-bottom: 90px;
 }
 .video-track-add:first-child {
-  margin-top: -4px;
+  margin-top: 0;
 }
 .video-track-details {
   width: calc(100% - 100px);
-  background-color: #b7b7b7;
+  background-color: #f7bb74;
 }
 
 .video-track-details-wrap {
@@ -255,25 +256,24 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 0 4px 0px #545454;
-  background-color: #ababab;
+  box-shadow: inset 0 0 2px 0px #ffd188;
+  background-color: #fe955b;
   color: #fff;
   border-right: 0px;
 }
 .video-track-title.current-track {
-  background-color: #192356;
+  background-color: #af5e1b;
 }
 .video-swap-btn-wrap {
   display: flex;
   flex-flow: column;
-  width: 22px;
+  width: 23px;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 0 4px 0px #545454;
-  border: 1px solid #949494;
-  background-color: #ababab;
-  border-left: 0;
-  border-right: 0pc;
+  box-shadow: inset 0 0 2px 0px #ffffff;
+   
+  background-color: #fe955b;
+  
 }
 
 body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
@@ -286,13 +286,12 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   display: flex;
   width: 22px;
   align-items: center;
-  box-shadow: inset 0 0 4px 0px #545454;
-  border: 1px solid #949494;
-  background-color: #ababab;
+  box-shadow: inset 0 0 2px 0px #ffffff;
+  
+  background-color: #fe955b;
   justify-content: center;
   color: #fff;
-  border-left: 0px;
-  border-right: 0px;
+  
   cursor: pointer;
 }
 
@@ -301,7 +300,7 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 }
 
 .video-swap-btn-wrap svg:first-child {
-  border-bottom: 1px solid #949494;
+  border-bottom: 1px solid #f8b064;
 }
 
 .video-remove-btn .svg-inline--fa.fa-w-14 {
@@ -309,8 +308,8 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 }
 
 .video-track-add {
-  box-shadow: inset 0 0 4px 0px #545454;
-  background-color: #ababab;
+  box-shadow: inset 0 0 2px 0px #ffffff;
+  background-color: #fe955b;
   justify-content: center;
   margin-top: -2px;
   padding-top: 8px;
@@ -326,8 +325,9 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 }
 .video-current-track {
   min-height: 48px;
-  box-shadow: inset 0 0 4px 0px #565656;
-  background-color: #848484;
+  box-shadow: inset 0 0 2px 0px #c7913b;
+  background-color: #ffffff;
+    opacity: 0.6;
 }
 .video-timer input {
   padding: 10px;
@@ -355,7 +355,7 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 }
 .video-track-info-wrap {
   width: 100%;
-  background-color: #b7b7b7;
+  background-color: #f7bb74;
 }
 
 .video-track-info {
