@@ -42,7 +42,7 @@
           v-if="!isChangingInterval"
           @click="isChangingInterval = !isChangingInterval"
         >
-          ...
+          <i class="far fa-clock"></i>
         </div>
 
         <div v-if="isChangingInterval">
