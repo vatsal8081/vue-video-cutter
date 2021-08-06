@@ -45,10 +45,8 @@
                   v-for="(media, mediaIndex) in track.medias"
                   :key="mediaIndex"
                 >
-                <div>
                   <audioPlayer :audioData="media"></audioPlayer>
                   <!-- <label>{{media.name}}</label> -->
-                  </div>
                 </div>
                 <!-- audio tracks -->
               </div>
@@ -272,6 +270,24 @@ export default {
   width: 100%;
 }
 
+.video-time-details::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.video-time-details::-webkit-scrollbar
+{
+		height: 6px;
+	background-color: #F5F5F5;
+}
+
+.video-time-details::-webkit-scrollbar-thumb
+{
+background-color: #af5e1b;
+}
+
+
 .video-time-details ul li {
   display: inline-block;
   width: 147px;
@@ -385,10 +401,30 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   fill: #fff;
 }
 .video-current-track {
+      overflow-x: auto;
   min-height: 48px;
   box-shadow: inset 0 0 2px 0px #c7913b;
-  background-color: #ffffff;
-  opacity: 0.6;
+  background-color: rgba(255, 255, 255,0.6);
+  display: flex;
+  align-items: center;
+}
+
+
+.video-current-track::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.video-current-track::-webkit-scrollbar
+{
+		height: 3px;
+	background-color: #F5F5F5;
+}
+
+.video-current-track::-webkit-scrollbar-thumb
+{
+background-color: #af5e1b;
 }
 .video-timer input {
   padding: 10px;
@@ -479,4 +515,15 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 .audio-track-wrap audio {
     height: 32px;
 }
+
+.audio-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-track label {
+    margin: 0px 16px;
+}
+
 </style>

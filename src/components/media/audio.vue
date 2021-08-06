@@ -1,6 +1,6 @@
 <template>
-  <div>
-    {{ audioData.name }}
+  <div class="audio-track">
+    <label>{{ audioData.name }}</label>
     <audio :src="audioData.src" controls>
       Your browser does not support the audio element.
     </audio>
