@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ videoData.name }}
+    <label> <marquee behavior="scroll" direction="left" scrollamount="5">{{ videoData.name }}</marquee></label>
     <video
       :src="videoData.src"
       controls

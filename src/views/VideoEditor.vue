@@ -52,13 +52,20 @@
                   v-for="(media, mediaIndex) in track.medias"
                   :key="mediaIndex"
                 >
-                  <div>
-                    <div @click="upMedia(i, mediaIndex)">
-                      <i class="fas fa-arrow-up"></i>
+                    <div class="track-arrow-btn">
+                      <div class="track-arrow-btn-up" @click="upMedia(i, mediaIndex)">
+                        <i class="fas fa-arrow-up"></i>
+                      </div>                      
+                      <div class="track-arrow-btn-down">
+                        <i class="fas fa-arrow-down"></i>
+                      </div>
+                      <div class="track-arrow-btn-left">
+                        <i class="fas fa-arrow-left"></i>
+                      </div>                                            
+                      <div class="track-arrow-btn-right">
+                        <i class="fas fa-arrow-right"></i>
+                      </div>
                     </div>
-                    <i class="fas fa-arrow-down"></i>
-                    <i class="fas fa-arrow-left"></i>
-                    <i class="fas fa-arrow-right"></i>
                     <template v-if="media.mediaType === 'audio'">
                       <audioPlayer :audioData="media"></audioPlayer>
                     </template>
@@ -66,7 +73,6 @@
                       <videoPlayer :videoData="media"></videoPlayer>
                     </template>
                     <!-- <label>{{media.name}}</label> -->
-                  </div>
                 </div>
                 <!-- audio tracks -->
               </div>
@@ -373,7 +379,7 @@ background-color: #af5e1b;
 
 .video-track-controls {
   display: flex;
-  min-height: 50px;
+  min-height:100px;
   margin-top: -2px;
 }
 
@@ -450,7 +456,7 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 }
 .video-current-track {
       overflow-x: auto;
-  min-height: 48px;
+  min-height: 98px;
   box-shadow: inset 0 0 2px 0px #c7913b;
   background-color: rgba(255, 255, 255,0.6);
   display: flex;
@@ -573,6 +579,73 @@ background-color: #af5e1b;
 
 .audio-track label {
     margin: 0px 16px;
+}
+
+.track-arrow-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #af5e1b;
+    position: relative;
+}
+
+.track-arrow-btn .track-arrow-btn-up {
+    height: 16px;
+    width: 14px;
+    position: absolute;
+    top: 0;
+    left: 10px;
+}
+
+.track-arrow-btn .track-arrow-btn-down {
+    height: 16px;
+    width: 14px;
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+}
+
+.track-arrow-btn .track-arrow-btn-left {
+    height: 16px;
+    width: 14px;
+    position: absolute;
+    top:10px;
+    left: 0px;
+}
+
+.track-arrow-btn .track-arrow-btn-right {
+
+    height: 16px;
+    width: 14px;
+    position: absolute;
+    top:10px;
+    right:0px;
+}
+
+.track-arrow-btn .track-arrow-btn-right svg path, .track-arrow-btn .track-arrow-btn-left svg path, 
+.track-arrow-btn .track-arrow-btn-up svg path, .track-arrow-btn .track-arrow-btn-down svg path {
+    fill: #fff;
+}
+.video-current-track video {
+    height: 90px;
+    aspect-ratio: auto;
+    width: auto;
+}
+
+.video-current-track .audio-track-wrap {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+.video-current-track .audio-track-wrap div {
+    display: flex;
+    align-items: center;
+}
+
+.video-current-track .audio-track-wrap div label {
+    font-size: 14px;
+    padding: 0 10px;
+    max-width:200px;
 }
 
 </style>
