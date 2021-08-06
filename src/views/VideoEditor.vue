@@ -43,7 +43,7 @@
                   v-for="(media, mediaIndex) in track.medias"
                   :key="mediaIndex"
                 >
-                  <audioPlayer :audioSrc="media.src"></audioPlayer>
+                  <audioPlayer :audioData="media"></audioPlayer>
                 </div>
                 <!-- audio tracks -->
               </div>

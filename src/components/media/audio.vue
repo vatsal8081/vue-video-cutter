@@ -1,6 +1,7 @@
 <template>
   <div>
-    <audio :src="audioSrc" controls>
+    {{ audioData.name }}
+    <audio :src="audioData.src" controls>
       Your browser does not support the audio element.
     </audio>
   </div>
@@ -9,8 +10,8 @@
 <script>
 export default {
   props: {
-    audioSrc: {
-      type: String,
+    audioData: {
+      type: Object,
       required: true,
     },
   },
