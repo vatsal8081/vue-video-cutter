@@ -14,11 +14,21 @@
               >
                 <div class="video-track-title current-track">V {{ i+1 }} </div>
                 <div class="video-swap-btn-wrap">
-                  <i class="fas fa-angle-up"></i>
-                  <i class="fas fa-angle-down"></i>
+                  <div v-if="i !== 0" @click="swapTrack('up', i)">
+                    <i class="fas fa-angle-up"></i>
+                  </div>
+                  <div
+                    v-if="i !== tracksData.length - 1"
+                    @click="swapTrack('down', i)"
+                  >
+                    <i class="fas fa-angle-down"></i>
+                  </div>
                 </div>
-                <div class="video-remove-btn" @click="removeTrack(i)">
-                  <i class="far fa-trash-alt"></i>
+                <div class="video-remove-btn">
+                  <div @click="removeTrack(i)">
+                    <i class="far fa-trash-alt"></i>
+                  </div>
+                  <input type="file" @input="addMedia($event, i)" />
                 </div>
               </div>
             </div>
@@ -27,7 +37,16 @@
                 class="video-current-track"
                 v-for="(track, i) in tracksData"
                 :key="i"
-              ></div>
+              >
+                <!-- audio tracks -->
+                <div
+                  v-for="(media, mediaIndex) in track.medias"
+                  :key="mediaIndex"
+                >
+                  <audioPlayer :audioSrc="media.src"></audioPlayer>
+                </div>
+                <!-- audio tracks -->
+              </div>
             </div>
           </div>
           <div class="video-track-left-controls">
@@ -79,16 +98,18 @@
 
 <script>
 import timeLine from "@/components/timeline/timeline.vue";
+import audioPlayer from "@/components/media/audio.vue";
 import { dragscroll } from "vue-dragscroll";
 
 export default {
-  components: { timeLine },
+  components: { timeLine, audioPlayer },
   directives: {
     dragscroll,
   },
 
   data() {
     return {
+      tmp: "",
       isChangingInterval: false,
       inputInterval: {
         hours: "00",
@@ -114,12 +135,37 @@ export default {
     },
 
     addTrack() {
-      this.tracksData.push({});
+      this.tracksData.push({ medias: [] });
     },
 
     removeTrack(i) {
       console.log("i is", i);
       this.tracksData.splice(i, 1);
+    },
+
+    addMedia(event, i) {
+      console.log("audio ", event.target.files, i);
+      let file = event.target.files;
+      let blobUrl = URL.createObjectURL(new Blob(file));
+
+      this.tracksData[i].medias.push({
+        name: file[0].name,
+        size: file[0].size,
+        type: file[0].type,
+        lastModifiedDate: file[0].lastModifiedDate,
+        src: blobUrl,
+      });
+      console.log("blob", this.tracksData);
+    },
+
+    swapTrack(swapTo, i) {
+      let [a, b] = [
+        this.tracksData[i],
+        this.tracksData[swapTo === "up" ? i - 1 : i + 1],
+      ];
+      this.tracksData[i] = b;
+      this.tracksData[swapTo === "up" ? i - 1 : i + 1] = a;
+      this.$forceUpdate();
     },
   },
 };
@@ -212,7 +258,7 @@ export default {
   background-color: #f9c78e;
   width: 25%;
   z-index: 1;
-      opacity: 0.5;
+  opacity: 0.5;
 }
 
 .video-track-left-controls {
@@ -259,9 +305,8 @@ export default {
   align-items: center;
   justify-content: center;
   box-shadow: inset 0 0 2px 0px #ffffff;
-   
+
   background-color: #fe955b;
-  
 }
 
 body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
@@ -275,11 +320,11 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   width: 22px;
   align-items: center;
   box-shadow: inset 0 0 2px 0px #ffffff;
-  
+
   background-color: #fe955b;
   justify-content: center;
   color: #fff;
-  
+
   cursor: pointer;
 }
 
@@ -315,7 +360,7 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   min-height: 48px;
   box-shadow: inset 0 0 2px 0px #c7913b;
   background-color: #ffffff;
-    opacity: 0.6;
+  opacity: 0.6;
 }
 .video-timer input {
   padding: 10px;
