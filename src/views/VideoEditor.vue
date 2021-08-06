@@ -12,7 +12,9 @@
                 v-for="(track, i) in tracksData"
                 :key="i"
               >
-                <div class="video-track-title current-track">V {{ i+1 }} </div>
+                <div class="video-track-title current-track">
+                  {{ track.title }}
+                </div>
                 <div class="video-swap-btn-wrap">
                   <div v-if="i !== 0" @click="swapTrack('up', i)">
                     <i class="fas fa-angle-up"></i>
@@ -44,8 +46,8 @@
                   :key="mediaIndex"
                 >
                 <div>
-                  <audioPlayer :audioSrc="media.src"></audioPlayer>
-                  <label>{{media.name}}</label>
+                  <audioPlayer :audioData="media"></audioPlayer>
+                  <!-- <label>{{media.name}}</label> -->
                   </div>
                 </div>
                 <!-- audio tracks -->
@@ -112,7 +114,10 @@ export default {
 
   data() {
     return {
-      tmp: "",
+      mediaLastTrackName: {
+        audio: 0,
+        video: 0,
+      },
       isChangingInterval: false,
       inputInterval: {
         hours: "00",
@@ -138,7 +143,10 @@ export default {
     },
 
     addTrack() {
-      this.tracksData.push({ medias: [] });
+      this.tracksData.push({
+        title: "",
+        medias: [],
+      });
     },
 
     removeTrack(i) {
@@ -158,6 +166,8 @@ export default {
         lastModifiedDate: file[0].lastModifiedDate,
         src: blobUrl,
       });
+
+      this.generateTrackTitle(this.tracksData[i]);
       console.log("blob", this.tracksData);
     },
 
@@ -169,6 +179,20 @@ export default {
       this.tracksData[i] = b;
       this.tracksData[swapTo === "up" ? i - 1 : i + 1] = a;
       this.$forceUpdate();
+    },
+
+    generateTrackTitle(track) {
+      if (track.medias[0].type.split("/")[0] === "audio") {
+        this.mediaLastTrackName.audio += 1;
+        track.title = `A${this.mediaLastTrackName.audio}`;
+        return;
+      }
+
+      if (track.medias[0].type.split("/")[0] === "video") {
+        this.mediaLastTrackName.video += 1;
+        track.title = `V${this.mediaLastTrackName.video}`;
+        return;
+      }
     },
   },
 };
@@ -190,7 +214,7 @@ export default {
 }
 
 .video-timer {
-  background-color:rgba(247,187,116,0.5);
+  background-color: rgba(247, 187, 116, 0.5);
   padding: 10px;
   position: fixed;
   left: 0;
@@ -370,7 +394,7 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   padding: 10px;
   border-radius: 6px;
   border: 0;
-    margin-right: 13px;
+  margin-right: 13px;
   margin-left: 10px;
 }
 
@@ -409,21 +433,26 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 .video-remove-btn .svg-inline--fa.fa-w-14:hover {
  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
   transform: translate3d(0, 0, 0);
- }
+}
 @keyframes shake {
-  10%, 90% {
+  10%,
+  90% {
     transform: translate3d(-1px, 0, 0);
   }
-  
-  20%, 80% {
+
+  20%,
+  80% {
     transform: translate3d(2px, 0, 0);
   }
 
-  30%, 50%, 70% {
+  30%,
+  50%,
+  70% {
     transform: translate3d(-1px, 0, 0);
   }
 
-  40%, 60% {
+  40%,
+  60% {
     transform: translate3d(2px, 0, 0);
   }
 }
