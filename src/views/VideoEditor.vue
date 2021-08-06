@@ -25,10 +25,10 @@
                   </div>
                 </div>
                 <div class="video-remove-btn">
-                  <div @click="removeTrack(i)">
+                  <div class="video-remove" @click="removeTrack(i)">
                     <i class="far fa-trash-alt"></i>
                   </div>
-                  <input type="file" @input="addMedia($event, i)" />
+                  <div class="audio-file"><input type="file" @input="addMedia($event, i)" /><i class="fas fa-file-audio"></i></div>
                 </div>
               </div>
             </div>
@@ -39,11 +39,14 @@
                 :key="i"
               >
                 <!-- audio tracks -->
-                <div
+                <div class="audio-track-wrap"
                   v-for="(media, mediaIndex) in track.medias"
                   :key="mediaIndex"
                 >
+                <div>
                   <audioPlayer :audioSrc="media.src"></audioPlayer>
+                  <label>{{media.name}}</label>
+                  </div>
                 </div>
                 <!-- audio tracks -->
               </div>
@@ -178,11 +181,11 @@ export default {
 }
 
 .video-timer-btn-wrap {
-  width: 100px;
+  width: 120px;
 }
 
 .video-time-details-wrap {
-  width: calc(100% - 100px);
+  width: calc(100% - 120px);
   display: flex;
 }
 
@@ -229,6 +232,7 @@ export default {
   padding: 10px;
   box-shadow: inset 0 0 4px 0px #c7913b;
   border: 1px solid #f8b064;
+  cursor: pointer;
 }
 
 .video-timer-btn svg path {
@@ -262,7 +266,7 @@ export default {
 }
 
 .video-track-left-controls {
-  width: 100px;
+  width: 120px;
   background-color: #f7bb74;
   padding-bottom: 90px;
 }
@@ -270,7 +274,7 @@ export default {
   margin-top: 0;
 }
 .video-track-details {
-  width: calc(100% - 100px);
+  width: calc(100% - 120px);
   background-color: #f7bb74;
 }
 
@@ -286,7 +290,7 @@ export default {
 }
 
 .video-track-title {
-  width: 55px;
+  width: 68px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -301,7 +305,7 @@ export default {
 .video-swap-btn-wrap {
   display: flex;
   flex-flow: column;
-  width: 23px;
+  width: 25px;
   align-items: center;
   justify-content: center;
   box-shadow: inset 0 0 2px 0px #ffffff;
@@ -317,14 +321,14 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 
 .video-remove-btn {
   display: flex;
-  width: 22px;
+  width: 27px;
   align-items: center;
   box-shadow: inset 0 0 2px 0px #ffffff;
 
   background-color: #fe955b;
   justify-content: center;
   color: #fff;
-
+  flex-flow: column;
   cursor: pointer;
 }
 
@@ -332,7 +336,7 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   fill: #fff;
 }
 
-.video-swap-btn-wrap svg:first-child {
+.video-swap-btn-wrap div:first-child {
   border-bottom: 1px solid #f8b064;
 }
 
@@ -402,7 +406,7 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   margin-top: -52px;
   position: relative;
 }
-.video-remove-btn:hover .svg-inline--fa.fa-w-14 {
+.video-remove-btn .svg-inline--fa.fa-w-14:hover {
  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
   transform: translate3d(0, 0, 0);
  }
@@ -423,6 +427,27 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
     transform: translate3d(2px, 0, 0);
   }
 }
- 
 
+.video-remove {
+    height: 22px;
+}
+
+.audio-file {
+    height: 17px;
+    position: relative;
+    
+}
+
+.audio-file input[type="file"] {
+    position: absolute;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    width: 17px;
+    cursor: pointer;
+}
+.video-swap-btn-wrap div:last-child { border: 0px; }
+.audio-track-wrap audio {
+    height: 32px;
+}
 </style>
