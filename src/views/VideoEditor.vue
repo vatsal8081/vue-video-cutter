@@ -12,7 +12,7 @@
                 v-for="(track, i) in tracksData"
                 :key="i"
               >
-                <div class="video-track-title current-track">V01</div>
+                <div class="video-track-title current-track">V {{ i+1 }} </div>
                 <div class="video-swap-btn-wrap">
                   <div v-if="i !== 0" @click="swapTrack('up', i)">
                     <i class="fas fa-angle-up"></i>
@@ -71,13 +71,13 @@
 
           <!-- <p v-if="isChangingInterval">dvdfgdfgdfg</p> -->
           <div div v-if="isChangingInterval" class="video-timer">
-            <span>H</span>
+            <span>Hours</span>
             <input type="number" v-model="inputInterval.hours" />
-            <span>M</span>
+            <span>Minute</span>
             <input type="number" v-model="inputInterval.minutes" />
-            <span>S</span>
+            <span>Second</span>
             <input type="number" v-model="inputInterval.seconds" />
-            <span>MS</span>
+            <span>Milliseconds</span>
             <input type="number" v-model="inputInterval.milliseconds" />
             <button @click="changeInterval">Set</button>
           </div>
@@ -187,7 +187,7 @@ export default {
 }
 
 .video-timer {
-  background-color: rgba(154, 154, 154, 0.5);
+  background-color:rgba(247,187,116,0.5);
   padding: 10px;
   position: fixed;
   left: 0;
@@ -198,7 +198,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-flow: column;
 }
 
 .video-timer svg path {
@@ -367,11 +366,12 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   padding: 10px;
   border-radius: 6px;
   border: 0;
-  margin-bottom: 13px;
+    margin-right: 13px;
+  margin-left: 10px;
 }
 
 .video-timer button {
-  background-color: #7d7d7d;
+  background-color: #fe955b;
   font-size: 18px;
   width: 140px;
   border: 0;
@@ -382,7 +382,7 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 }
 
 .video-timer button:hover {
-  background-color: #9a9a9a;
+  background-color: #f7bb74;
 }
 .video-main-wrap {
   margin-bottom: 20px;
@@ -402,4 +402,27 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   margin-top: -52px;
   position: relative;
 }
+.video-remove-btn:hover .svg-inline--fa.fa-w-14 {
+ animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+ }
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(2px, 0, 0);
+  }
+}
+ 
+
 </style>
