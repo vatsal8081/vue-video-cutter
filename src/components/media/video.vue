@@ -1,6 +1,10 @@
 <template>
   <div>
-    <label> <marquee behavior="scroll" direction="left" scrollamount="5">{{ videoData.name }}</marquee></label>
+    <label> <marquee behavior="scroll" direction="left" scrollamount="5">{{
+      videoData.name.length > 25
+        ? `${videoData.name.substring(0, 25)}...`
+        : videoData.name
+    }}</marquee></label>
     <video
       :src="videoData.src"
       controls
