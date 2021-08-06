@@ -53,6 +53,12 @@
                   :key="mediaIndex"
                 >
                   <div>
+                    <div @click="upMedia(i, mediaIndex)">
+                      <i class="fas fa-arrow-up"></i>
+                    </div>
+                    <i class="fas fa-arrow-down"></i>
+                    <i class="fas fa-arrow-left"></i>
+                    <i class="fas fa-arrow-right"></i>
                     <template v-if="media.mediaType === 'audio'">
                       <audioPlayer :audioData="media"></audioPlayer>
                     </template>
@@ -170,7 +176,6 @@ export default {
     addMedia(event, i) {
       console.log("audio ", event.target.files, i);
       let file = event.target.files;
-      console.log("tmp", event.target.value);
       let blobUrl = URL.createObjectURL(new Blob(file));
 
       this.tracksData[i].medias.push({
@@ -207,6 +212,31 @@ export default {
       if (track.medias[0].mediaType === "video") {
         this.mediaLastTrackName.video += 1;
         track.title = `V${this.mediaLastTrackName.video}`;
+        return;
+      }
+    },
+
+    // media change methods
+    upMedia(trackIndex, mediaIndex) {
+      console.log("up", trackIndex, mediaIndex);
+      if (trackIndex === 0) return;
+
+      if (!this.tracksData[trackIndex - 1].medias[mediaIndex]) {
+        this.tracksData[trackIndex - 1].medias.push(
+          this.tracksData[trackIndex].medias[mediaIndex]
+        );
+        this.tracksData[trackIndex].medias.splice(mediaIndex, 1);
+        return;
+      }
+
+      if (this.tracksData[trackIndex - 1].medias[mediaIndex]) {
+        let [a, b] = [
+          this.tracksData[trackIndex].medias[mediaIndex],
+          this.tracksData[trackIndex - 1].medias[mediaIndex],
+        ];
+        console.log("tmp", a, b);
+        this.tracksData[trackIndex].medias[mediaIndex] = b;
+        this.tracksData[trackIndex - 1].medias[mediaIndex] = a;
         return;
       }
     },
