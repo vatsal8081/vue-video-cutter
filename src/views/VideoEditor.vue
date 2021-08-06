@@ -53,26 +53,38 @@
                   :key="mediaIndex"
                 >
                   <div class="track-arrow-btn">
-                    <div class="track-arrow-btn-up" @click="upMedia(i, mediaIndex)">
+                    <div
+                      class="track-arrow-btn-up"
+                      @click="upMedia(i, mediaIndex)"
+                    >
                       <i class="fas fa-arrow-up"></i>
-                    </div> 
-                    <div class="track-arrow-btn-down" @click="downMedia(i, mediaIndex)">
+                    </div>
+                    <div
+                      class="track-arrow-btn-down"
+                      @click="downMedia(i, mediaIndex)"
+                    >
                       <i class="fas fa-arrow-down"></i>
                     </div>
-                    <div class="track-arrow-btn-left" @click="leftMedia(i, mediaIndex)" >
+                    <div
+                      class="track-arrow-btn-left"
+                      @click="leftMedia(i, mediaIndex)"
+                    >
                       <i class="fas fa-arrow-left"></i>
                     </div>
-                    <div class="track-arrow-btn-right" @click="rightMedia(i, mediaIndex)">
+                    <div
+                      class="track-arrow-btn-right"
+                      @click="rightMedia(i, mediaIndex)"
+                    >
                       <i class="fas fa-arrow-right"></i>
                     </div>
                   </div>
-                    <template v-if="media.mediaType === 'audio'">
-                      <audioPlayer :audioData="media"></audioPlayer>
-                    </template>
-                    <template v-if="media.mediaType === 'video'">
-                      <videoPlayer :videoData="media"></videoPlayer>
-                    </template>
-                    <!-- <label>{{media.name}}</label> -->
+                  <template v-if="media.mediaType === 'audio'">
+                    <audioPlayer :audioData="media"></audioPlayer>
+                  </template>
+                  <template v-if="media.mediaType === 'video'">
+                    <videoPlayer :videoData="media"></videoPlayer>
+                  </template>
+                  <!-- <label>{{media.name}}</label> -->
                 </div>
                 <!-- audio tracks -->
               </div>
@@ -177,6 +189,7 @@ export default {
     removeTrack(i) {
       console.log("i is", i);
       this.tracksData.splice(i, 1);
+      this.generateTrackTitle();
     },
 
     addMedia(event, i) {
@@ -193,7 +206,7 @@ export default {
         src: blobUrl,
       });
 
-      this.generateTrackTitle(this.tracksData[i]);
+      this.generateTrackTitle();
       console.log("blob", this.tracksData);
       event.target.value = null;
     },
@@ -208,38 +221,24 @@ export default {
       this.$forceUpdate();
     },
 
-    generateTrackTitle(track, all = false) {
-      if (all) {
-        this.mediaLastTrackName.audio = 0;
-        this.mediaLastTrackName.video = 0;
-        this.tracksData.forEach((el) => {
-          if (el.medias[0]?.mediaType === "audio") {
-            console.log("in");
-            this.mediaLastTrackName.audio += 1;
-            el.title = `A${this.mediaLastTrackName.audio}`;
-          }
-
-          if (el.medias[0]?.mediaType === "video") {
-            this.mediaLastTrackName.video += 1;
-            el.title = `V${this.mediaLastTrackName.video}`;
-          }
-          if (!el.medias[0]?.mediaType) {
-            el.title = "";
-          }
-        });
-      } else {
-        if (track.medias[0].mediaType === "audio") {
+    generateTrackTitle() {
+      this.mediaLastTrackName.audio = 0;
+      this.mediaLastTrackName.video = 0;
+      this.tracksData.forEach((el) => {
+        if (el.medias[0]?.mediaType === "audio") {
+          console.log("in");
           this.mediaLastTrackName.audio += 1;
-          track.title = `A${this.mediaLastTrackName.audio}`;
-          return;
+          el.title = `A${this.mediaLastTrackName.audio}`;
         }
 
-        if (track.medias[0].mediaType === "video") {
+        if (el.medias[0]?.mediaType === "video") {
           this.mediaLastTrackName.video += 1;
-          track.title = `V${this.mediaLastTrackName.video}`;
-          return;
+          el.title = `V${this.mediaLastTrackName.video}`;
         }
-      }
+        if (!el.medias[0]?.mediaType) {
+          el.title = "";
+        }
+      });
     },
 
     // media change methods
@@ -252,7 +251,7 @@ export default {
           this.tracksData[trackIndex].medias[mediaIndex]
         );
         this.tracksData[trackIndex].medias.splice(mediaIndex, 1);
-        this.generateTrackTitle(null, true);
+        this.generateTrackTitle();
         return;
       }
 
@@ -265,7 +264,7 @@ export default {
         this.tracksData[trackIndex].medias[mediaIndex] = b;
         this.tracksData[trackIndex - 1].medias[mediaIndex] = a;
         console.log("tmp2", this.tracksData);
-        this.generateTrackTitle(null, true);
+        this.generateTrackTitle();
         this.$forceUpdate();
         return;
       }
@@ -279,7 +278,7 @@ export default {
           this.tracksData[trackIndex].medias[mediaIndex]
         );
         this.tracksData[trackIndex].medias.splice(mediaIndex, 1);
-        this.generateTrackTitle(null, true);
+        this.generateTrackTitle();
         return;
       }
 
@@ -292,7 +291,7 @@ export default {
         this.tracksData[trackIndex].medias[mediaIndex] = b;
         this.tracksData[trackIndex + 1].medias[mediaIndex] = a;
         console.log("tmp2", this.tracksData);
-        this.generateTrackTitle(null, true);
+        this.generateTrackTitle();
         this.$forceUpdate();
         return;
       }
@@ -450,7 +449,7 @@ export default {
 
 .video-track-controls {
   display: flex;
-  min-height:100px;
+  min-height: 100px;
   margin-top: -2px;
 }
 
@@ -526,7 +525,7 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   fill: #fff;
 }
 .video-current-track {
-      overflow-x: auto;
+  overflow-x: auto;
   min-height: 98px;
   box-shadow: inset 0 0 2px 0px #c7913b;
   background-color: rgba(255, 255, 255, 0.6);
@@ -649,70 +648,70 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 }
 
 .track-arrow-btn {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: #af5e1b;
-    position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #af5e1b;
+  position: relative;
 }
 
 .track-arrow-btn .track-arrow-btn-up {
-    height: 16px;
-    width: 14px;
-    position: absolute;
-    top: 0;
-    left: 10px;
+  height: 16px;
+  width: 14px;
+  position: absolute;
+  top: 0;
+  left: 10px;
 }
 
 .track-arrow-btn .track-arrow-btn-down {
-    height: 16px;
-    width: 14px;
-    position: absolute;
-    bottom: 0;
-    left: 10px;
+  height: 16px;
+  width: 14px;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
 }
 
 .track-arrow-btn .track-arrow-btn-left {
-    height: 16px;
-    width: 14px;
-    position: absolute;
-    top:10px;
-    left: 0px;
+  height: 16px;
+  width: 14px;
+  position: absolute;
+  top: 10px;
+  left: 0px;
 }
 
 .track-arrow-btn .track-arrow-btn-right {
-
-    height: 16px;
-    width: 14px;
-    position: absolute;
-    top:10px;
-    right:0px;
+  height: 16px;
+  width: 14px;
+  position: absolute;
+  top: 10px;
+  right: 0px;
 }
 
-.track-arrow-btn .track-arrow-btn-right svg path, .track-arrow-btn .track-arrow-btn-left svg path, 
-.track-arrow-btn .track-arrow-btn-up svg path, .track-arrow-btn .track-arrow-btn-down svg path {
-    fill: #fff;
+.track-arrow-btn .track-arrow-btn-right svg path,
+.track-arrow-btn .track-arrow-btn-left svg path,
+.track-arrow-btn .track-arrow-btn-up svg path,
+.track-arrow-btn .track-arrow-btn-down svg path {
+  fill: #fff;
 }
 .video-current-track video {
-    height: 90px;
-    aspect-ratio: auto;
-    width: auto;
+  height: 90px;
+  aspect-ratio: auto;
+  width: auto;
 }
 
 .video-current-track .audio-track-wrap {
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
 }
 .video-current-track .audio-track-wrap div {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .video-current-track .audio-track-wrap div label {
-    font-size: 14px;
-    padding: 0 10px;
-    max-width:200px;
+  font-size: 14px;
+  padding: 0 10px;
+  max-width: 200px;
 }
-
 </style>
