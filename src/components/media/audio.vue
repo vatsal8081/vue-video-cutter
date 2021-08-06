@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="media_wrap">
    <label> <marquee behavior="scroll" direction="left" scrollamount="5"> {{
         audioData.name.length > 25
           ? `${audioData.name.substring(0, 25)}...`

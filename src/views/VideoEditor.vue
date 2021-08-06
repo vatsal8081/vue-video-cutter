@@ -112,15 +112,28 @@
 
           <!-- <p v-if="isChangingInterval">dvdfgdfgdfg</p> -->
           <div div v-if="isChangingInterval" class="video-timer">
-            <span>Hours</span>
-            <input type="number" v-model="inputInterval.hours" />
-            <span>Minute</span>
-            <input type="number" v-model="inputInterval.minutes" />
-            <span>Second</span>
-            <input type="number" v-model="inputInterval.seconds" />
-            <span>Milliseconds</span>
-            <input type="number" v-model="inputInterval.milliseconds" />
-            <button @click="changeInterval">Set</button>
+            <div class="modal_filed_wrap">
+              <div class="modal_filed">
+                <span>Hours</span>
+                <input type="number" v-model="inputInterval.hours" />
+              </div>
+              <div class="modal_filed">
+                <span>Minute</span>
+                <input type="number" v-model="inputInterval.minutes" />
+              </div>
+              <div class="modal_filed">
+                <span>Second</span>
+                <input type="number" v-model="inputInterval.seconds" />
+              </div>
+              <div class="modal_filed">
+                <span>Milliseconds</span>
+                <input type="number" v-model="inputInterval.milliseconds" />
+              </div>
+              <div class="modal_filed">
+                <span>&nbsp;</span>
+                <button @click="changeInterval">Set</button>
+              </div>
+            </div>
           </div>
         </div>
         <!-- change interval -->
@@ -399,17 +412,17 @@ export default {
 }
 
 .video-time-details::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #f5f5f5;
+  // -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: rgb(75, 100, 121);
 }
 
 .video-time-details::-webkit-scrollbar {
   height: 6px;
-  background-color: #f5f5f5;
+  background-color: rgb(25, 50, 72);
 }
 
 .video-time-details::-webkit-scrollbar-thumb {
-  background-color: #af5e1b;
+  background-color: rgba(240, 240, 240, 0.541);
 }
 
 .video-time-details ul li {
@@ -698,6 +711,10 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   aspect-ratio: auto;
   width: auto;
 }
+.video-current-track{
+  padding: 10px 0;
+  align-items: unset;
+}
 
 .video-current-track .audio-track-wrap {
   display: flex;
@@ -713,5 +730,253 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   font-size: 14px;
   padding: 0 10px;
   max-width: 200px;
+}
+
+.video-current-track .audio-track-wrap {
+    position: relative;
+    padding: 20px 30px 20px;
+}
+
+.video-current-track .audio-track-wrap .track-arrow-btn {
+  display: block !important;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border-radius: unset;
+}
+
+.video-current-track .audio-track-wrap .track-arrow-btn:hover > div{
+  opacity: 1;
+}
+
+.video-current-track .audio-track-wrap .track-arrow-btn > div {
+    width: 20px;
+    height: 20px;
+    background-color: #af5e1b;
+    text-align: center;
+    line-height: 20px;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s;
+}
+.video-current-track .audio-track-wrap .track-arrow-btn .track-arrow-btn-up {
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    left: 0;
+}
+
+.video-current-track .audio-track-wrap .track-arrow-btn .track-arrow-btn-down {
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    bottom: -5px;
+}
+
+.video-current-track .audio-track-wrap .track-arrow-btn .track-arrow-btn-left {
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+}
+
+.video-current-track .audio-track-wrap .track-arrow-btn .track-arrow-btn-right {
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.media_wrap{
+  flex-wrap: wrap;
+}
+.media_wrap > label{width: 100%;}
+.video-current-track .audio-track-wrap {
+    max-width:25%;
+    width: 100%;
+}
+
+.video-current-track .audio-track-wrap div {
+    justify-content: center;
+}
+.video-current-track {
+    min-height: 156px;
+}
+
+.video-track-controls {
+    min-height: 178px;
+}
+.video-track-info-wrap,
+.video-track-details-wrap{
+  background-color:#1d3d59;
+}
+.video-track-left-controls{
+  background-color: transparent;
+}
+.video-track-left-controls{
+  padding-bottom: 0;
+}
+.video-track-details-wrap{
+  padding: 20px;
+}
+.video-track-add {
+    background-color: #fe6f42;
+    color: #eae8d8;
+    width: 55px;
+    height: 55px;
+    border-radius: 50px;
+    padding: 0;
+    line-height: 55px;
+    box-shadow: 0 0 7px #0f2d48;
+    margin-top: 20px !important;
+    position: relative;
+    left: 45%;
+    transform: translateX(-50%);
+}
+.video-track-controls {flex-wrap: wrap;justify-content: space-between;padding: 0 10px 10px 0;}
+
+.video-track-controls .video-track-title {
+    width: 100%;
+    background-color: rgb(253, 185, 58);
+    color: #000;
+    font-weight: 700;
+    border-radius: 13px;
+    margin-bottom: 8px;
+}
+
+.video-track-controls > div:not(.video-track-title) {
+    width: 46%;
+    box-shadow: unset;
+    border-radius: 10px;
+}
+
+.video-track-controls .video-remove-btn {
+    justify-content: space-evenly;
+}
+
+.video-track-controls .video-remove-btn > div {
+    background-color: rgba(0, 0, 0, 0.18);
+    width: calc(100% - 20px);
+    height: 30px;
+    line-height: 32px;
+    border-radius: 4px;
+    padding: 0;
+    position: relative;
+}
+.video-track-controls .video-remove-btn > div input{
+  width: 100%;
+  height: 100%;
+}
+.video-track-controls .video-remove-btn > div svg {
+    width: unset !important;
+    font-size: 15px;
+}
+.video-timer-btn {
+    background-color: rgb(254, 111, 66);
+    box-shadow: unset;
+    border: unset;
+}
+
+.video-time-details ul:after {
+    border: unset;
+}
+
+.video-time-details {
+    background-color: rgb(254, 111, 66);
+}
+
+.video-current-time {
+    background-color: rgba(0, 0, 0, 0.302);
+    opacity: unset;
+}
+
+.video-track-details {
+    background-color: #1d3d59;
+}
+
+.video-current-track {
+    background-color: #203548;
+    border: none;
+    box-shadow: none;
+    border-radius: 10px;
+}
+
+.video-current-track .audio-track-wrap div label {
+    color: #fff;
+    max-width: 100%;
+}
+.video-current-track:not(:first-child) {
+    margin-top: 5px;
+}
+.video-main-wrap {
+    width: 100%;
+    // overflow-x: auto;
+}
+
+.video-timer-wrap {
+    padding: 20px;
+    background-color: #19334a;
+    width: auto;
+}
+.video-timer-btn{
+
+  border-radius: 10px 0 0 10px;
+}
+
+.video-time-details-wrap {
+    width: calc(100% - 120px);
+    overflow: hidden;
+    border-radius: 0 10px 10px 0;
+}
+.video-time-details-wrap ul {height: unset;}
+.video-time-details-wrap ul > li {padding: 7px 25px;}
+
+.video-timer{
+  background-color: rgba(0, 0, 0, 0.81);
+}
+.modal_filed_wrap {
+    max-width: 1240px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.modal_filed {
+    max-width: 19%;
+    width: 100%;
+}
+
+.modal_filed span {
+    display: block;
+    color: #666;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+// *:focus-visible{outline: none;}
+.modal_filed input {
+    width: -webkit-fill-available;
+    margin: 0;
+    max-width: 100%;
+    display: block;
+    box-shadow:  0px 10px 50px rgba(0,0,0,0.10);
+}
+.modal_filed button{
+  box-shadow:  0px 10px 50px rgba(0,0,0,0.10);
+  border-radius: 6px;
+  width: 100%;
 }
 </style>

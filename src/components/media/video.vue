@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="media_wrap">
     <label> <marquee behavior="scroll" direction="left" scrollamount="5">{{
       videoData.name.length > 25
         ? `${videoData.name.substring(0, 25)}...`
