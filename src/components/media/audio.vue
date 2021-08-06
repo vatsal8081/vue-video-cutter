@@ -1,7 +1,7 @@
 <template>
-  <div class="audio-track">
-    <label>{{ audioData.name }}</label>
-    <audio :src="audioData.src" controls>
+  <div>
+   <label> {{ audioData.name }} </label> 
+    <audio :src="audioData.src" controls controlsList="nodownload">
       Your browser does not support the audio element.
     </audio>
   </div>
