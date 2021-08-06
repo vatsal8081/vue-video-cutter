@@ -30,7 +30,13 @@
                   <div class="video-remove" @click="removeTrack(i)">
                     <i class="far fa-trash-alt"></i>
                   </div>
-                  <div class="audio-file"><input type="file" @input="addMedia($event, i)" /><i class="fas fa-file-audio"></i></div>
+                  <div class="audio-file">
+                    <input
+                      type="file"
+                      @input="addMedia($event, i)"
+                      accept="audio/*,video/*"
+                    /><i class="fas fa-file-audio"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -41,13 +47,19 @@
                 :key="i"
               >
                 <!-- audio tracks -->
-                <div class="audio-track-wrap"
+                <div
+                  class="audio-track-wrap"
                   v-for="(media, mediaIndex) in track.medias"
                   :key="mediaIndex"
                 >
-                <div>
-                  <audioPlayer :audioData="media"></audioPlayer>
-                  <!-- <label>{{media.name}}</label> -->
+                  <div>
+                    <template v-if="media.mediaType === 'audio'">
+                      <audioPlayer :audioData="media"></audioPlayer>
+                    </template>
+                    <template v-if="media.mediaType === 'video'">
+                      <videoPlayer :videoData="media"></videoPlayer>
+                    </template>
+                    <!-- <label>{{media.name}}</label> -->
                   </div>
                 </div>
                 <!-- audio tracks -->
@@ -104,10 +116,11 @@
 <script>
 import timeLine from "@/components/timeline/timeline.vue";
 import audioPlayer from "@/components/media/audio.vue";
+import videoPlayer from "@/components/media/video.vue";
 import { dragscroll } from "vue-dragscroll";
 
 export default {
-  components: { timeLine, audioPlayer },
+  components: { timeLine, audioPlayer, videoPlayer },
   directives: {
     dragscroll,
   },
@@ -157,6 +170,7 @@ export default {
     addMedia(event, i) {
       console.log("audio ", event.target.files, i);
       let file = event.target.files;
+      console.log("tmp", event.target.value);
       let blobUrl = URL.createObjectURL(new Blob(file));
 
       this.tracksData[i].medias.push({
@@ -164,11 +178,13 @@ export default {
         size: file[0].size,
         type: file[0].type,
         lastModifiedDate: file[0].lastModifiedDate,
+        mediaType: file[0].type.split("/")[0],
         src: blobUrl,
       });
 
       this.generateTrackTitle(this.tracksData[i]);
       console.log("blob", this.tracksData);
+      event.target.value = null;
     },
 
     swapTrack(swapTo, i) {
@@ -182,13 +198,13 @@ export default {
     },
 
     generateTrackTitle(track) {
-      if (track.medias[0].type.split("/")[0] === "audio") {
+      if (track.medias[0].mediaType === "audio") {
         this.mediaLastTrackName.audio += 1;
         track.title = `A${this.mediaLastTrackName.audio}`;
         return;
       }
 
-      if (track.medias[0].type.split("/")[0] === "video") {
+      if (track.medias[0].mediaType === "video") {
         this.mediaLastTrackName.video += 1;
         track.title = `V${this.mediaLastTrackName.video}`;
         return;
@@ -431,7 +447,7 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   position: relative;
 }
 .video-remove-btn .svg-inline--fa.fa-w-14:hover {
- animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);
 }
 @keyframes shake {
@@ -458,25 +474,26 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 }
 
 .video-remove {
-    height: 22px;
+  height: 22px;
 }
 
 .audio-file {
-    height: 17px;
-    position: relative;
-    
+  height: 17px;
+  position: relative;
 }
 
 .audio-file input[type="file"] {
-    position: absolute;
-    left: 0;
-    right: 0;
-    opacity: 0;
-    width: 17px;
-    cursor: pointer;
+  position: absolute;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  width: 17px;
+  cursor: pointer;
 }
-.video-swap-btn-wrap div:last-child { border: 0px; }
+.video-swap-btn-wrap div:last-child {
+  border: 0px;
+}
 .audio-track-wrap audio {
-    height: 32px;
+  height: 32px;
 }
 </style>
