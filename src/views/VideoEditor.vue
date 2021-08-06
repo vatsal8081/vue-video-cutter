@@ -56,16 +56,21 @@
                     <div @click="upMedia(i, mediaIndex)">
                       <i class="fas fa-arrow-up"></i>
                     </div>
-                    <i class="fas fa-arrow-down"></i>
-                    <i class="fas fa-arrow-left"></i>
-                    <i class="fas fa-arrow-right"></i>
+                    <div @click="downMedia(i, mediaIndex)">
+                      <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div @click="leftMedia(i, mediaIndex)">
+                      <i class="fas fa-arrow-left"></i>
+                    </div>
+                    <div @click="rightMedia(i, mediaIndex)">
+                      <i class="fas fa-arrow-right"></i>
+                    </div>
                     <template v-if="media.mediaType === 'audio'">
                       <audioPlayer :audioData="media"></audioPlayer>
                     </template>
                     <template v-if="media.mediaType === 'video'">
                       <videoPlayer :videoData="media"></videoPlayer>
                     </template>
-                    <!-- <label>{{media.name}}</label> -->
                   </div>
                 </div>
                 <!-- audio tracks -->
@@ -202,17 +207,37 @@ export default {
       this.$forceUpdate();
     },
 
-    generateTrackTitle(track) {
-      if (track.medias[0].mediaType === "audio") {
-        this.mediaLastTrackName.audio += 1;
-        track.title = `A${this.mediaLastTrackName.audio}`;
-        return;
-      }
+    generateTrackTitle(track, all = false) {
+      if (all) {
+        this.mediaLastTrackName.audio = 0;
+        this.mediaLastTrackName.video = 0;
+        this.tracksData.forEach((el) => {
+          if (el.medias[0]?.mediaType === "audio") {
+            console.log("in");
+            this.mediaLastTrackName.audio += 1;
+            el.title = `A${this.mediaLastTrackName.audio}`;
+          }
 
-      if (track.medias[0].mediaType === "video") {
-        this.mediaLastTrackName.video += 1;
-        track.title = `V${this.mediaLastTrackName.video}`;
-        return;
+          if (el.medias[0]?.mediaType === "video") {
+            this.mediaLastTrackName.video += 1;
+            el.title = `V${this.mediaLastTrackName.video}`;
+          }
+          if (!el.medias[0]?.mediaType) {
+            el.title = "";
+          }
+        });
+      } else {
+        if (track.medias[0].mediaType === "audio") {
+          this.mediaLastTrackName.audio += 1;
+          track.title = `A${this.mediaLastTrackName.audio}`;
+          return;
+        }
+
+        if (track.medias[0].mediaType === "video") {
+          this.mediaLastTrackName.video += 1;
+          track.title = `V${this.mediaLastTrackName.video}`;
+          return;
+        }
       }
     },
 
@@ -226,6 +251,7 @@ export default {
           this.tracksData[trackIndex].medias[mediaIndex]
         );
         this.tracksData[trackIndex].medias.splice(mediaIndex, 1);
+        this.generateTrackTitle(null, true);
         return;
       }
 
@@ -237,8 +263,62 @@ export default {
         console.log("tmp", a, b);
         this.tracksData[trackIndex].medias[mediaIndex] = b;
         this.tracksData[trackIndex - 1].medias[mediaIndex] = a;
+        console.log("tmp2", this.tracksData);
+        this.generateTrackTitle(null, true);
+        this.$forceUpdate();
         return;
       }
+    },
+    downMedia(trackIndex, mediaIndex) {
+      console.log("Down", trackIndex, mediaIndex);
+      if (trackIndex === this.tracksData.length - 1) return;
+
+      if (!this.tracksData[trackIndex + 1].medias[mediaIndex]) {
+        this.tracksData[trackIndex + 1].medias.push(
+          this.tracksData[trackIndex].medias[mediaIndex]
+        );
+        this.tracksData[trackIndex].medias.splice(mediaIndex, 1);
+        this.generateTrackTitle(null, true);
+        return;
+      }
+
+      if (this.tracksData[trackIndex + 1].medias[mediaIndex]) {
+        let [a, b] = [
+          this.tracksData[trackIndex].medias[mediaIndex],
+          this.tracksData[trackIndex + 1].medias[mediaIndex],
+        ];
+        console.log("tmp", a, b);
+        this.tracksData[trackIndex].medias[mediaIndex] = b;
+        this.tracksData[trackIndex + 1].medias[mediaIndex] = a;
+        console.log("tmp2", this.tracksData);
+        this.generateTrackTitle(null, true);
+        this.$forceUpdate();
+        return;
+      }
+    },
+    leftMedia(trackIndex, mediaIndex) {
+      console.log("left", trackIndex, mediaIndex);
+      if (!this.tracksData[trackIndex].medias[mediaIndex - 1]) return;
+
+      let [a, b] = [
+        this.tracksData[trackIndex].medias[mediaIndex],
+        this.tracksData[trackIndex].medias[mediaIndex - 1],
+      ];
+      this.tracksData[trackIndex].medias[mediaIndex] = b;
+      this.tracksData[trackIndex].medias[mediaIndex - 1] = a;
+      this.$forceUpdate();
+    },
+    rightMedia(trackIndex, mediaIndex) {
+      console.log("right", trackIndex, mediaIndex);
+      if (!this.tracksData[trackIndex].medias[mediaIndex + 1]) return;
+
+      let [a, b] = [
+        this.tracksData[trackIndex].medias[mediaIndex],
+        this.tracksData[trackIndex].medias[mediaIndex + 1],
+      ];
+      this.tracksData[trackIndex].medias[mediaIndex] = b;
+      this.tracksData[trackIndex].medias[mediaIndex + 1] = a;
+      this.$forceUpdate();
     },
   },
 };
@@ -318,23 +398,19 @@ export default {
   width: 100%;
 }
 
-.video-time-details::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+.video-time-details::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
 }
 
-.video-time-details::-webkit-scrollbar
-{
-		height: 6px;
-	background-color: #F5F5F5;
+.video-time-details::-webkit-scrollbar {
+  height: 6px;
+  background-color: #f5f5f5;
 }
 
-.video-time-details::-webkit-scrollbar-thumb
-{
-background-color: #af5e1b;
+.video-time-details::-webkit-scrollbar-thumb {
+  background-color: #af5e1b;
 }
-
 
 .video-time-details ul li {
   display: inline-block;
@@ -449,30 +525,26 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   fill: #fff;
 }
 .video-current-track {
-      overflow-x: auto;
+  overflow-x: auto;
   min-height: 48px;
   box-shadow: inset 0 0 2px 0px #c7913b;
-  background-color: rgba(255, 255, 255,0.6);
+  background-color: rgba(255, 255, 255, 0.6);
   display: flex;
   align-items: center;
 }
 
-
-.video-current-track::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+.video-current-track::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
 }
 
-.video-current-track::-webkit-scrollbar
-{
-		height: 3px;
-	background-color: #F5F5F5;
+.video-current-track::-webkit-scrollbar {
+  height: 3px;
+  background-color: #f5f5f5;
 }
 
-.video-current-track::-webkit-scrollbar-thumb
-{
-background-color: #af5e1b;
+.video-current-track::-webkit-scrollbar-thumb {
+  background-color: #af5e1b;
 }
 .video-timer input {
   padding: 10px;
@@ -566,13 +638,12 @@ background-color: #af5e1b;
 }
 
 .audio-track {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .audio-track label {
-    margin: 0px 16px;
+  margin: 0px 16px;
 }
-
 </style>

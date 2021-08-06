@@ -1,6 +1,10 @@
 <template>
   <div>
-    {{ videoData.name }}
+    {{
+      videoData.name.length > 25
+        ? `${videoData.name.substring(0, 25)}...`
+        : videoData.name
+    }}
     <video
       :src="videoData.src"
       controls

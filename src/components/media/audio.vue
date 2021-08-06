@@ -1,6 +1,12 @@
 <template>
   <div>
-   <label> {{ audioData.name }} </label> 
+    <label>
+      {{
+        audioData.name.length > 25
+          ? `${audioData.name.substring(0, 25)}...`
+          : audioData.name
+      }}
+    </label>
     <audio :src="audioData.src" controls controlsList="nodownload">
       Your browser does not support the audio element.
     </audio>
