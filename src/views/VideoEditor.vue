@@ -155,6 +155,15 @@
           <!-- track left bar -->
         </div>
       </div>
+
+      <!-- <p>abcsaoidfhdsfh</p>
+      <draggable v-model="tracksData">
+        <transition-group>
+          <div v-for="(el, i) in tracksData" :key="i">
+            {{ el.title }}
+          </div>
+        </transition-group>
+      </draggable> -->
       <!-- <xns-seek-bar
         :bar-color="'#ffdd00'"
         :current-value="33"
@@ -176,6 +185,7 @@ import audioPlayer from "@/components/media/audio.vue";
 import videoPlayer from "@/components/media/video.vue";
 import { dragscroll } from "vue-dragscroll";
 import seekBar from "../components/seek/seekBar.vue";
+// import draggable from "vuedraggable";
 
 export default {
   components: { timeLine, audioPlayer, videoPlayer, seekBar },
@@ -767,6 +777,7 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 .video-current-track .audio-track-wrap {
   position: relative;
   padding: 20px 30px 20px;
+  z-index: 9;
 }
 
 .video-current-track .audio-track-wrap .track-arrow-btn {
