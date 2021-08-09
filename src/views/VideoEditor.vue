@@ -155,16 +155,14 @@
           <!-- track left bar -->
         </div>
       </div>
-      <xns-seek-bar
+      <!-- <xns-seek-bar
         :bar-color="'#ffdd00'"
         :current-value="33"
         :total-value="100"
         :listen="true"
-      ></xns-seek-bar>
+      ></xns-seek-bar> -->
 
-      <div>
-        <seekBar></seekBar>
-      </div>
+      <div></div>
     </div>
   </div>
 </template>

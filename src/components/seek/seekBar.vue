@@ -1,10 +1,6 @@
 <template>
   <div>
-    <div
-      ref="listenTo"
-      :style="'width:' + (progress + 10) + '%'"
-      class="progress-wrapper"
-    >
+    <div ref="listenTo" class="progress-wrapper">
       <div :style="{ width: progress + '%' }" class="progress"></div>
     </div>
   </div>
@@ -44,7 +40,7 @@ export default {
       let seekWidth = e.offsetX;
 
       // change seek position
-      this.progress = (seekWidth / this.wrapperWidth) * 20;
+      this.progress = (seekWidth / this.wrapperWidth) * 100;
     },
     detectMouseDown(e) {
       e.preventDefault(); // prevent browser from moving objects, following links etc
