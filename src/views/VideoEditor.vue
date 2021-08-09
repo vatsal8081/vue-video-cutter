@@ -39,113 +39,121 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="video-track-details">
+
+              <div class="video-track-left-controls">
+                <div class="video-track-add" @click="addTrack">
+                  <i class="fas fa-plus"></i>
+                </div>
+              </div>
+              <!-- change interval -->
               <div
-                class="video-current-track"
-                v-for="(track, i) in tracksData"
-                :key="i"
+                class="video-timer-btn"
+                @click="isChangingInterval = !isChangingInterval"
               >
-                <!-- audio tracks -->
-                <div
-                  class="audio-track-wrap"
-                  v-for="(media, mediaIndex) in track.medias"
-                  :key="mediaIndex"
-                >
-                  <div class="track-arrow-btn">
-                    <div
-                      class="track-arrow-btn-up"
-                      @click="upMedia(i, mediaIndex)"
-                    >
-                      <i class="fas fa-arrow-up"></i>
+                <i class="far fa-clock"></i>
+              </div>
+              <!-- change interval -->
+              <div class="video-timer-btn-wrap">
+                <!-- <p v-if="isChangingInterval">dvdfgdfgdfg</p> -->
+                <div div v-if="isChangingInterval" class="video-timer">
+                  <div class="modal_filed_wrap">
+                    <div class="modal_filed">
+                      <span>Hours</span>
+                      <input type="number" v-model="inputInterval.hours" />
                     </div>
-                    <div
-                      class="track-arrow-btn-down"
-                      @click="downMedia(i, mediaIndex)"
-                    >
-                      <i class="fas fa-arrow-down"></i>
+                    <div class="modal_filed">
+                      <span>Minute</span>
+                      <input type="number" v-model="inputInterval.minutes" />
                     </div>
-                    <div
-                      class="track-arrow-btn-left"
-                      @click="leftMedia(i, mediaIndex)"
-                    >
-                      <i class="fas fa-arrow-left"></i>
+                    <div class="modal_filed">
+                      <span>Second</span>
+                      <input type="number" v-model="inputInterval.seconds" />
                     </div>
-                    <div
-                      class="track-arrow-btn-right"
-                      @click="rightMedia(i, mediaIndex)"
-                    >
-                      <i class="fas fa-arrow-right"></i>
+                    <div class="modal_filed">
+                      <span>Milliseconds</span>
+                      <input
+                        type="number"
+                        v-model="inputInterval.milliseconds"
+                      />
+                    </div>
+                    <div class="modal_filed">
+                      <span>&nbsp;</span>
+                      <button @click="changeInterval">Set</button>
                     </div>
                   </div>
-                  <template v-if="media.mediaType === 'audio'">
-                    <audioPlayer :audioData="media"></audioPlayer>
-                  </template>
-                  <template v-if="media.mediaType === 'video'">
-                    <videoPlayer :videoData="media"></videoPlayer>
-                  </template>
-                  <!-- <label>{{media.name}}</label> -->
                 </div>
-                <!-- audio tracks -->
+              </div>
+            </div>
+            <div class="video-track-details">
+              <div class="video-track-details-in">
+                <div
+                  class="video-current-track"
+                  v-for="(track, i) in tracksData"
+                  :key="i"
+                >
+                  <!-- audio tracks -->
+
+                  <div
+                    class="audio-track-wrap"
+                    v-for="(media, mediaIndex) in track.medias"
+                    :key="mediaIndex"
+                  >
+                    <div class="track-arrow-btn">
+                      <div
+                        class="track-arrow-btn-up"
+                        @click="upMedia(i, mediaIndex)"
+                      >
+                        <i class="fas fa-arrow-up"></i>
+                      </div>
+                      <div
+                        class="track-arrow-btn-down"
+                        @click="downMedia(i, mediaIndex)"
+                      >
+                        <i class="fas fa-arrow-down"></i>
+                      </div>
+                      <div
+                        class="track-arrow-btn-left"
+                        @click="leftMedia(i, mediaIndex)"
+                      >
+                        <i class="fas fa-arrow-left"></i>
+                      </div>
+                      <div
+                        class="track-arrow-btn-right"
+                        @click="rightMedia(i, mediaIndex)"
+                      >
+                        <i class="fas fa-arrow-right"></i>
+                      </div>
+                    </div>
+                    <template v-if="media.mediaType === 'audio'">
+                      <audioPlayer :audioData="media"></audioPlayer>
+                    </template>
+                    <template v-if="media.mediaType === 'video'">
+                      <videoPlayer :videoData="media"></videoPlayer>
+                    </template>
+                    <!-- <label>{{media.name}}</label> -->
+                  </div>
+
+                  <!-- audio tracks -->
+                </div>
+                <div class="progress_wrp">
+                  <seekBar></seekBar>
+                </div>
+                <!-- tracks component -->
+                <div class="video-timer-wrap">
+                  <!-- timeline component -->
+                  <timeLine
+                    v-dragscroll.x="true"
+                    startTime="00:00:00:00"
+                    endTime="00:01:00:00"
+                    :interVal="interval"
+                  ></timeLine>
+                  <!-- timeline component -->
+                </div>
               </div>
             </div>
           </div>
-          <div class="video-track-left-controls">
-            <div class="video-track-add" @click="addTrack">
-              <i class="fas fa-plus"></i>
-            </div>
-          </div>
+          <!-- track left bar -->
         </div>
-
-        <!-- track left bar -->
-      </div>
-      <!-- tracks component -->
-      <div class="video-timer-wrap">
-        <!-- change interval -->
-        <div class="video-timer-btn-wrap">
-          <div
-            class="video-timer-btn"
-            @click="isChangingInterval = !isChangingInterval"
-          >
-            <i class="far fa-clock"></i>
-          </div>
-
-          <!-- <p v-if="isChangingInterval">dvdfgdfgdfg</p> -->
-          <div div v-if="isChangingInterval" class="video-timer">
-            <div class="modal_filed_wrap">
-              <div class="modal_filed">
-                <span>Hours</span>
-                <input type="number" v-model="inputInterval.hours" />
-              </div>
-              <div class="modal_filed">
-                <span>Minute</span>
-                <input type="number" v-model="inputInterval.minutes" />
-              </div>
-              <div class="modal_filed">
-                <span>Second</span>
-                <input type="number" v-model="inputInterval.seconds" />
-              </div>
-              <div class="modal_filed">
-                <span>Milliseconds</span>
-                <input type="number" v-model="inputInterval.milliseconds" />
-              </div>
-              <div class="modal_filed">
-                <span>&nbsp;</span>
-                <button @click="changeInterval">Set</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- change interval -->
-        <!-- timeline component -->
-        <timeLine
-          v-dragscroll.x="true"
-          startTime="00:00:00:00"
-          endTime="00:01:00:00"
-          :interVal="interval"
-        ></timeLine>
-        <!-- timeline component -->
       </div>
       <xns-seek-bar
         :bar-color="'#ffdd00'"
@@ -154,10 +162,15 @@
         :listen="true"
       ></xns-seek-bar>
 
-      <seekBar></seekBar>
+      <div>
+        <seekBar></seekBar>
+      </div>
     </div>
   </div>
 </template>
+
+
+
 
 <script>
 import timeLine from "@/components/timeline/timeline.vue";
@@ -347,19 +360,28 @@ export default {
 </script>
 
 <style lang="scss">
+* {
+  margin: 0;
+  padding: 0;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
 .video-timer-wrap {
-  display: flex;
-  width: 100%;
+  // display: flex;
+  // width: 100%;
 }
 
 .video-timer-btn-wrap {
   width: 120px;
 }
 
-.video-time-details-wrap {
-  width: calc(100% - 120px);
-  display: flex;
-}
+// .video-time-details-wrap {
+//   width: calc(100% - 120px);
+//   display: flex;
+// }
 
 .video-timer {
   background-color: rgba(247, 187, 116, 0.5);
@@ -387,6 +409,8 @@ export default {
   padding-left: 0;
   position: relative;
   z-index: 2;
+  background-color: rgb(254, 111, 66);
+  border-radius: 0px 10px 10px 0px;
 }
 .video-time-details ul:after {
   content: "";
@@ -412,12 +436,12 @@ export default {
 }
 
 .video-time-details {
-  overflow-x: auto;
+  // overflow-x: auto;
   background-color: #fe955b;
   display: flex;
   position: relative;
   box-shadow: inset 0 0 4px 0px #c7913b;
-  width: 100%;
+  // width: 100%;
 }
 
 .video-time-details::-webkit-scrollbar-track {
@@ -460,7 +484,7 @@ export default {
   margin-top: 0;
 }
 .video-track-details {
-  width: calc(100% - 120px);
+  // width: calc(100% - 120px);
   background-color: #f7bb74;
 }
 
@@ -547,10 +571,10 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   fill: #fff;
 }
 .video-current-track {
-  overflow-x: auto;
+  // overflow-x: auto;
   min-height: 98px;
   box-shadow: inset 0 0 2px 0px #c7913b;
-  background-color: rgba(255, 255, 255, 0.6);
+  // background-color: rgba(255, 255, 255, 0.6);
   display: flex;
   align-items: center;
 }
@@ -600,9 +624,10 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 
 .video-track-info {
   display: flex;
+  align-items: flex-end;
 }
 .video-track-info .video-track-left-controls {
-  padding-bottom: 0px;
+  padding-bottom: 7px;
 }
 .video-track-left-controls.video-track-not-show {
   margin-top: -52px;
@@ -722,7 +747,7 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 }
 .video-current-track {
   padding: 10px 0;
-  align-items: unset;
+  // align-items: unset;
 }
 
 .video-current-track .audio-track-wrap {
@@ -810,8 +835,9 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   width: 100%;
 }
 .video-current-track .audio-track-wrap {
-  max-width: 25%;
-  width: 100%;
+  // min-width: 25%;
+  // width: 100%;
+  min-width: 350px;
 }
 
 .video-current-track .audio-track-wrap div {
@@ -903,9 +929,9 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   border: unset;
 }
 
-.video-time-details {
-  background-color: rgb(254, 111, 66);
-}
+// .video-time-details {
+//   background-color: rgb(254, 111, 66);
+// }
 
 .video-current-time {
   background-color: rgba(0, 0, 0, 0.302);
@@ -917,7 +943,7 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 }
 
 .video-current-track {
-  background-color: #203548;
+  // background-color: #203548;
   border: none;
   box-shadow: none;
   border-radius: 10px;
@@ -936,25 +962,25 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 }
 
 .video-timer-wrap {
-  padding: 20px;
+  padding: 95px 0 0 0;
   background-color: #19334a;
-  width: auto;
+  // width: 100%;
 }
 .video-timer-btn {
   border-radius: 10px 0 0 10px;
 }
 
 .video-time-details-wrap {
-  width: calc(100% - 120px);
-  overflow: hidden;
-  border-radius: 0 10px 10px 0;
+  // width: 100%;
+  // overflow: hidden;
+  // border-radius: 0 10px 10px 0;
 }
-.video-time-details-wrap ul {
-  height: unset;
-}
-.video-time-details-wrap ul > li {
-  padding: 7px 25px;
-}
+// .video-time-details-wrap ul {
+//   height: unset;
+// }
+// .video-time-details-wrap ul > li {
+//   padding: 7px 25px;
+// }
 
 .video-timer {
   background-color: rgba(0, 0, 0, 0.81);
@@ -997,4 +1023,63 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   border-radius: 6px;
   width: 100%;
 }
+//--Start video cutter line
+.video-track-details {
+  // position: relative;
+  overflow: hidden;
+}
+.video-track-details .video-track-details-in {
+  overflow-x: auto;
+  background-color: #203548;
+  position: relative;
+}
+.video-track-details .progress_wrp {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+.video-track-details .progress_wrp .progress-wrapper {
+  margin: 0;
+  height: 100%;
+  background: transparent;
+}
+.video-track-details .progress_wrp > div {
+  height: 100%;
+}
+.video-track-details .progress_wrp .progress-wrapper .progress {
+  border-right: 2px solid #fdb93a;
+  background: transparent;
+}
+.video-track-details .progress_wrp .progress-wrapper .progress:after {
+  content: "";
+  width: 0;
+  height: 0;
+  display: inline-block;
+  border: 9px solid transparent;
+  border-bottom: none;
+  border-top: 9px solid #fdb93a;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto -10px 0 auto;
+  z-index: 3;
+}
+.video-track-details-in::-webkit-scrollbar-track {
+  background-color: rgb(75, 100, 121);
+}
+
+.video-track-details-in::-webkit-scrollbar {
+  height: 6px;
+  background-color: rgb(25, 50, 72);
+}
+
+.video-track-details-in::-webkit-scrollbar-thumb {
+  background-color: rgba(240, 240, 240, 0.541);
+}
+//--End video cutter line
 </style>
