@@ -108,39 +108,32 @@
                         v-for="(media, mediaIndex) in track.medias"
                         :key="mediaIndex"
                       >
-                        <!--  experimental -->
-                        <!-- <div style="height: 100px">
-                          {{ media.name }}
-                        </div> -->
-
-                        <!--  experimental -->
-
-                        <div class="track-arrow-btn">
-                          <div
-                            class="track-arrow-btn-up"
-                            @click="upMedia(i, mediaIndex)"
-                          >
-                            <i class="fas fa-arrow-up"></i>
-                          </div>
-                          <div
-                            class="track-arrow-btn-down"
-                            @click="downMedia(i, mediaIndex)"
-                          >
-                            <i class="fas fa-arrow-down"></i>
-                          </div>
-                          <div
-                            class="track-arrow-btn-left"
-                            @click="leftMedia(i, mediaIndex)"
-                          >
-                            <i class="fas fa-arrow-left"></i>
-                          </div>
-                          <div
-                            class="track-arrow-btn-right"
-                            @click="rightMedia(i, mediaIndex)"
-                          >
-                            <i class="fas fa-arrow-right"></i>
-                          </div>
-                        </div>
+                        <!-- <div class="track-arrow-btn">
+                            <div
+                              class="track-arrow-btn-up"
+                              @click="upMedia(i, mediaIndex)"
+                            >
+                              <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div
+                              class="track-arrow-btn-down"
+                              @click="downMedia(i, mediaIndex)"
+                            >
+                              <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div
+                              class="track-arrow-btn-left"
+                              @click="leftMedia(i, mediaIndex)"
+                            >
+                              <i class="fas fa-arrow-left"></i>
+                            </div>
+                            <div
+                              class="track-arrow-btn-right"
+                              @click="rightMedia(i, mediaIndex)"
+                            >
+                              <i class="fas fa-arrow-right"></i>
+                            </div>
+                          </div> -->
                         <template v-if="media.mediaType === 'audio'">
                           <audioPlayer :audioData="media"></audioPlayer>
                         </template>
@@ -671,10 +664,12 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 .video-current-track > div {
   // overflow-x: auto;
   min-height: 98px;
-  box-shadow: inset 0 0 2px 0px #c7913b;
+  //box-shadow: inset 0 0 2px 0px #c7913b;
   // background-color: rgba(255, 255, 255, 0.6);
   display: flex;
   align-items: center;
+  margin: 0 -15px;
+  flex-wrap: wrap;
 }
 
 .video-current-track::-webkit-scrollbar-track {
@@ -1045,7 +1040,9 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   // background-color: #203548;
   border: none;
   box-shadow: none;
-  border-radius: 10px;
+  border-radius: 0;
+  border-bottom: 1px solid #636363;
+  padding: 0 15px;
 }
 
 .video-current-track .audio-track-wrap div label {
@@ -1181,8 +1178,12 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   background-color: rgba(240, 240, 240, 0.541);
 }
 //--End video cutter line
-.ghost {
-  opacity: 0.5;
-  background: #c8ebfb;
+
+.video-current-track .audio-track-wrap {
+  max-width: 33.33%;
+  flex: 0 0 33.33%;
+  width: 100%;
+  padding: 0 15px;
+  min-height: 156px;
 }
 </style>
