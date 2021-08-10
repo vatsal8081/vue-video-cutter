@@ -451,10 +451,7 @@ export default {
 *:after {
   box-sizing: border-box;
 }
-.video-timer-wrap {
-  // display: flex;
-  // width: 100%;
-}
+
 
 .video-timer-btn-wrap {
   width: 120px;
@@ -834,13 +831,17 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   fill: #fff;
 }
 .video-current-track video {
-  height: 90px;
-  aspect-ratio: auto;
-  width: auto;
+  height: 110px;
+    aspect-ratio: auto;
+    width: 240px;
+    object-fit: cover;
 }
 .video-current-track {
   padding: 10px 0;
   // align-items: unset;
+}
+.video-current-track .audio-track-wrap[draggable="true"] {
+    zoom: 0.5;
 }
 
 .video-current-track .audio-track-wrap {
@@ -848,21 +849,27 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   align-items: center;
   padding: 0 10px;
 }
-.video-current-track .audio-track-wrap div {
+.video-current-track .audio-track-wrap > div {
   display: flex;
-  align-items: center;
+  height: 140px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .video-current-track .audio-track-wrap div label {
   font-size: 14px;
   padding: 0 10px;
   max-width: 200px;
+  margin-bottom: auto;
 }
 
 .video-current-track .audio-track-wrap {
   position: relative;
   padding: 20px 30px 20px;
   z-index: 9;
+}
+.video-current-track .audio-track-wrap > div >*:not(label){
+  margin-top: auto;
 }
 
 .video-current-track .audio-track-wrap .track-arrow-btn {
@@ -922,9 +929,9 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   top: 50%;
   transform: translateY(-50%);
 }
-.media_wrap {
-  flex-wrap: wrap;
-}
+// .media_wrap {
+//   flex-wrap: wrap;
+// }
 .media_wrap > label {
   width: 100%;
 }
@@ -934,9 +941,9 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   min-width: 350px;
 }
 
-.video-current-track .audio-track-wrap div {
-  justify-content: center;
-}
+// .video-current-track .audio-track-wrap div {
+//   justify-content: center;
+// }
 .video-current-track {
   min-height: 156px;
 }
