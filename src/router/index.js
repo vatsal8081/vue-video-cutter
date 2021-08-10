@@ -2,11 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import Home from '../views/Home.vue'
 import VideoEditor from '@/views/VideoEditor.vue';
+import tmp from '@/views/tmp.vue';
 
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/', name: 'home', component: VideoEditor },
+  { path: '/tmp', name: 'tmp', component: tmp },
   // {
   //   path: '/',
   //   name: 'Home',

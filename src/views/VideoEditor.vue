@@ -86,55 +86,62 @@
             </div>
             <div class="video-track-details">
               <div class="video-track-details-in">
-                <div
-                  class="video-current-track"
-                  v-for="(track, i) in tracksData"
-                  :key="i"
-                >
-                  <!-- audio tracks -->
-
+                <draggable v-model="tracksData" tag="div">
                   <div
-                    class="audio-track-wrap"
-                    v-for="(media, mediaIndex) in track.medias"
-                    :key="mediaIndex"
+                    class="video-current-track"
+                    v-for="(track, i) in tracksData"
+                    :key="i"
                   >
-                    <div class="track-arrow-btn">
+                    <!-- audio tracks -->
+                    <draggable
+                      :list="track.medias"
+                      tag="div"
+                      :group="{ name: 'row' }"
+                    >
                       <div
-                        class="track-arrow-btn-up"
-                        @click="upMedia(i, mediaIndex)"
+                        class="audio-track-wrap"
+                        v-for="(media, mediaIndex) in track.medias"
+                        :key="mediaIndex"
                       >
-                        <i class="fas fa-arrow-up"></i>
+                        <div class="track-arrow-btn">
+                          <div
+                            class="track-arrow-btn-up"
+                            @click="upMedia(i, mediaIndex)"
+                          >
+                            <i class="fas fa-arrow-up"></i>
+                          </div>
+                          <div
+                            class="track-arrow-btn-down"
+                            @click="downMedia(i, mediaIndex)"
+                          >
+                            <i class="fas fa-arrow-down"></i>
+                          </div>
+                          <div
+                            class="track-arrow-btn-left"
+                            @click="leftMedia(i, mediaIndex)"
+                          >
+                            <i class="fas fa-arrow-left"></i>
+                          </div>
+                          <div
+                            class="track-arrow-btn-right"
+                            @click="rightMedia(i, mediaIndex)"
+                          >
+                            <i class="fas fa-arrow-right"></i>
+                          </div>
+                        </div>
+                        <template v-if="media.mediaType === 'audio'">
+                          <audioPlayer :audioData="media"></audioPlayer>
+                        </template>
+                        <template v-if="media.mediaType === 'video'">
+                          <videoPlayer :videoData="media"></videoPlayer>
+                        </template>
+                        <!-- <label>{{media.name}}</label> -->
                       </div>
-                      <div
-                        class="track-arrow-btn-down"
-                        @click="downMedia(i, mediaIndex)"
-                      >
-                        <i class="fas fa-arrow-down"></i>
-                      </div>
-                      <div
-                        class="track-arrow-btn-left"
-                        @click="leftMedia(i, mediaIndex)"
-                      >
-                        <i class="fas fa-arrow-left"></i>
-                      </div>
-                      <div
-                        class="track-arrow-btn-right"
-                        @click="rightMedia(i, mediaIndex)"
-                      >
-                        <i class="fas fa-arrow-right"></i>
-                      </div>
-                    </div>
-                    <template v-if="media.mediaType === 'audio'">
-                      <audioPlayer :audioData="media"></audioPlayer>
-                    </template>
-                    <template v-if="media.mediaType === 'video'">
-                      <videoPlayer :videoData="media"></videoPlayer>
-                    </template>
-                    <!-- <label>{{media.name}}</label> -->
-                  </div>
+                    </draggable>
 
-                  <!-- audio tracks -->
-                </div>
+                    <!-- audio tracks -->
+                  </div>
+                </draggable>
                 <div class="progress_wrp">
                   <seekBar></seekBar>
                 </div>
@@ -186,9 +193,10 @@ import videoPlayer from "@/components/media/video.vue";
 import { dragscroll } from "vue-dragscroll";
 import seekBar from "../components/seek/seekBar.vue";
 // import draggable from "vuedraggable";
+import draggable from "vuedraggable";
 
 export default {
-  components: { timeLine, audioPlayer, videoPlayer, seekBar },
+  components: { timeLine, audioPlayer, videoPlayer, seekBar, draggable },
   directives: {
     dragscroll,
   },
