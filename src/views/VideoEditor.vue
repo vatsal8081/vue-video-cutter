@@ -641,95 +641,534 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   flex-wrap: wrap;
 }
 
-.video-current-track::-webkit-scrollbar-track{box-shadow:inset 0 0 6px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);background-color:#f5f5f5;}
-.video-current-track::-webkit-scrollbar{height:3px;background-color:#f5f5f5;}
-.video-current-track::-webkit-scrollbar-thumb{background-color:#af5e1b;}
-.video-timer input{padding:10px;border-radius:6px;border:0;margin-right:13px;margin-left:10px;}
-.video-timer button{background-color:#fe955b;font-size:18px;width:140px;border:0;padding:7px;color:#fff;border-radius:36px;cursor:pointer;}
-.video-timer button:hover{background-color:#f7bb74;}
-.video-main-wrap{margin-bottom:20px;}
-.video-track-info-wrap{width:100%;background-color:#f7bb74;}
-.video-track-info{display:flex;align-items:flex-start;}
-.video-track-info .video-track-left-controls{padding-bottom:7px;}
-.video-track-left-controls.video-track-not-show{margin-top:-52px;position:relative;}
-.video-remove-btn .svg-inline--fa.fa-w-14:hover{animation:shake 0.82s cubic-bezier(0.36,0.07,0.19,0.97) both;transform:translate3d(0,0,0);}
-@keyframes shake{10%,90%{transform:translate3d(-1px,0,0);}
-20%,80%{transform:translate3d(2px,0,0);}
-30%,50%,70%{transform:translate3d(-1px,0,0);}
-40%,60%{transform:translate3d(2px,0,0);}
+.video-current-track::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
 }
-.video-remove{height:22px;}
-.audio-file{height:17px;position:relative;}
-.audio-file input[type="file"]{position:absolute;left:0;right:0;opacity:0;width:17px;cursor:pointer;}
-.video-swap-btn-wrap div:last-child{border:0px;}
-.audio-track-wrap audio{height:32px;}
-.audio-track{display:flex;align-items:center;justify-content:center;}
-.audio-track label{margin:0px 16px;}
-.track-arrow-btn{width:34px;height:34px;border-radius:50%;background:#af5e1b;position:relative;}
-.track-arrow-btn .track-arrow-btn-up{height:16px;width:14px;position:absolute;top:0;left:10px;}
-.track-arrow-btn .track-arrow-btn-down{height:16px;width:14px;position:absolute;bottom:0;left:10px;}
-.track-arrow-btn .track-arrow-btn-left{height:16px;width:14px;position:absolute;top:10px;left:0px;}
-.track-arrow-btn .track-arrow-btn-right{height:16px;width:14px;position:absolute;top:10px;right:0px;}
-.track-arrow-btn .track-arrow-btn-right svg path,.track-arrow-btn .track-arrow-btn-left svg path,.track-arrow-btn .track-arrow-btn-up svg path,.track-arrow-btn .track-arrow-btn-down svg path{fill:#fff;}
-.video-current-track video{height:120px;aspect-ratio:auto;width:240px;object-fit:cover;}
-.video-current-track{padding:10px 0;}
-.video-current-track .audio-track-wrap{display:flex;align-items:center;padding:0 10px;}
-.video-current-track .audio-track-wrap[draggable="true"]{zoom:0.5;}
 
-.video-current-track .audio-track-wrap div{display:flex;align-items:center;}
-.video-current-track .audio-track-wrap div label{font-size:14px;padding:0 10px;max-width:200px;}
-.video-current-track .audio-track-wrap{position:relative;padding:20px 30px 20px;z-index:9;}
-.video-current-track .audio-track-wrap .track-arrow-btn{display:block !important;position:absolute;right:0;left:0;top:0;bottom:0;width:100%;height:100%;background-color:transparent;border-radius:unset;}
-.video-current-track .audio-track-wrap .track-arrow-btn:hover>div{opacity:1;}
-.video-current-track .audio-track-wrap .track-arrow-btn>div{width:20px;height:20px;background-color:#af5e1b;text-align:center;line-height:20px;color:#fff;justify-content:center;align-items:center;font-size:12px;border-radius:20px;cursor:pointer;opacity:0;transition:all 0.3s;}
-.video-current-track .audio-track-wrap .track-arrow-btn .track-arrow-btn-up{right:0;top:0;margin:0 auto;left:0;}
-.video-current-track .audio-track-wrap .track-arrow-btn .track-arrow-btn-down{right:0;left:0;margin:0 auto;bottom:-5px;}
-.video-current-track .audio-track-wrap .track-arrow-btn .track-arrow-btn-left{top:50%;transform:translateY(-50%);left:10px;}
-.video-current-track .audio-track-wrap .track-arrow-btn .track-arrow-btn-right{right:5px;top:50%;transform:translateY(-50%);}
-.media_wrap{flex-wrap:wrap;}
-.media_wrap>label{width:100%;}
-.video-current-track .audio-track-wrap{min-width:350px;}
-.video-current-track .audio-track-wrap div{justify-content:center;}
-.video-current-track{min-height:156px;}
-.video-track-controls{min-height:158px;}
-.video-track-info-wrap,.video-track-details-wrap{background-color:#1d3d59;}
-.video-track-left-controls{background-color:transparent;}
-.video-track-left-controls{padding-bottom:0;}
-.video-track-details-wrap{padding:20px;}
-.video-track-add{background-color:#fe6f42;color:#eae8d8;width:55px;height:55px;border-radius:50px;padding:0;line-height:55px;box-shadow:0 0 7px #0f2d48;margin-top:20px !important;position:relative;left:45%;transform:translateX(-50%);}
-.video-track-controls{flex-wrap:wrap;justify-content:space-between;padding:0 10px 10px 0;}
-.video-track-controls .video-track-title{width:100%;background-color:rgb(253,185,58);color:#000;font-weight:700;border-radius:13px;}
-.video-track-controls>div:not(.video-track-title){width:46%;box-shadow:unset;border-radius:10px;padding:6px 0;}
-.video-track-controls .video-remove-btn{justify-content:space-evenly;}
-.video-track-controls .video-remove-btn>div{background-color:rgba(0,0,0,0.18);width:calc(100% - 20px);height:30px;line-height:32px;border-radius:4px;padding:0;position:relative;}
-.video-track-controls .video-remove-btn>div input{width:100%;height:100%;}
-.video-track-controls .video-remove-btn>div svg{width:unset !important;font-size:15px;}
-.video-timer-btn{background-color:rgb(254,111,66);box-shadow:unset;padding:10px;border:unset;border-radius:10px 0 0 10px;cursor:pointer;margin-top:13px;}
-.video-time-details ul:after{border:unset;}
-.video-current-time{background-color:rgba(0,0,0,0.302);opacity:unset;}
-.video-track-details{background-color:#1d3d59;}
-.video-current-track{border:none;box-shadow:none;border-radius:0;border-bottom:1px solid #636363;padding:0 15px;}
-.video-current-track .audio-track-wrap div label{color:#fff;max-width:100%;}
-.video-current-track:not(:first-child){margin-top:5px;}
-.video-main-wrap{width:100%;}
-.video-timer-wrap{padding:95px 0 0 0;background-color:#19334a;}
-.video-timer{background-color:rgba(0,0,0,0.81);}
-.modal_filed_wrap{max-width:1240px;display:flex;flex-wrap:wrap;justify-content:space-between;width:100%;background-color:#f5f5f5;padding:20px;border-radius:10px;}
-.modal_filed{max-width:19%;width:100%;}
-.modal_filed span{display:block;color:#666;text-align:left;font-weight:600;text-transform:uppercase;font-size:12px;margin-bottom:3px;}
-.modal_filed input{width:-webkit-fill-available;margin:0;max-width:100%;display:block;box-shadow:0px 10px 50px rgba(0,0,0,0.1);}
-.modal_filed button{box-shadow:0px 10px 50px rgba(0,0,0,0.1);border-radius:6px;width:100%;}
-.video-track-details{overflow:hidden;}
-.video-track-details .video-track-details-in{overflow-x:auto;background-color:#203548;position:relative;}
-.video-track-details .progress_wrp{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%;}
-.video-track-details .progress_wrp .progress-wrapper{margin:0;height:100%;background:transparent;}
-.video-track-details .progress_wrp>div{height:100%;}
-.video-track-details .progress_wrp .progress-wrapper .progress{border-right:2px solid #fdb93a;background:transparent;}
-.video-track-details .progress_wrp .progress-wrapper .progress:after{content:"";width:0;height:0;display:inline-block;border:9px solid transparent;border-bottom:none;border-top:9px solid #fdb93a;position:absolute;top:0;left:0;right:0;margin:auto -10px 0 auto;z-index:3;}
-.video-track-details-in::-webkit-scrollbar-track{background-color:rgb(75,100,121);}
-.video-track-details-in::-webkit-scrollbar{height:6px;background-color:rgb(25,50,72);}
-.video-track-details-in::-webkit-scrollbar-thumb{background-color:rgba(240,240,240,0.541);}
+.video-current-track::-webkit-scrollbar {
+    height: 3px;
+    background-color: #f5f5f5;
+}
+
+.video-current-track::-webkit-scrollbar-thumb {
+    background-color: #af5e1b;
+}
+
+.video-timer input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 0;
+    margin-right: 13px;
+    margin-left: 10px;
+}
+
+.video-timer button {
+    background-color: #fe955b;
+    font-size: 18px;
+    width: 140px;
+    border: 0;
+    padding: 7px;
+    color: #fff;
+    border-radius: 36px;
+    cursor: pointer;
+}
+
+.video-timer button:hover {
+    background-color: #f7bb74;
+}
+
+.video-main-wrap {
+    margin-bottom: 20px;
+}
+
+.video-track-info-wrap {
+    width: 100%;
+    background-color: #f7bb74;
+}
+
+.video-track-info {
+    display: flex;
+    align-items: flex-start;
+}
+
+.video-track-info .video-track-left-controls {
+    padding-bottom: 7px;
+}
+
+.video-track-left-controls.video-track-not-show {
+    margin-top: -52px;
+    position: relative;
+}
+
+.video-remove-btn .svg-inline--fa.fa-w-14:hover {
+    animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    transform: translate3d(0, 0, 0);
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    40%, 60% {
+        transform: translate3d(2px, 0, 0);
+    }
+}
+
+.video-remove {
+    height: 22px;
+}
+
+.audio-file {
+    height: 17px;
+    position: relative;
+}
+
+.audio-file input[type="file"] {
+    position: absolute;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    width: 17px;
+    cursor: pointer;
+}
+
+.video-swap-btn-wrap div:last-child {
+    border: 0px;
+}
+
+.audio-track-wrap audio {
+    height: 32px;
+}
+
+.audio-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-track label {
+    margin: 0px 16px;
+}
+
+.track-arrow-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #af5e1b;
+    position: relative;
+}
+
+.track-arrow-btn .track-arrow-btn-up {
+    height: 16px;
+    width: 14px;
+    position: absolute;
+    top: 0;
+    left: 10px;
+}
+
+.track-arrow-btn .track-arrow-btn-down {
+    height: 16px;
+    width: 14px;
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+}
+
+.track-arrow-btn .track-arrow-btn-left {
+    height: 16px;
+    width: 14px;
+    position: absolute;
+    top: 10px;
+    left: 0px;
+}
+
+.track-arrow-btn .track-arrow-btn-right {
+    height: 16px;
+    width: 14px;
+    position: absolute;
+    top: 10px;
+    right: 0px;
+}
+
+.track-arrow-btn .track-arrow-btn-right svg path, .track-arrow-btn .track-arrow-btn-left svg path, .track-arrow-btn .track-arrow-btn-up svg path, .track-arrow-btn .track-arrow-btn-down svg path {
+    fill: #fff;
+}
+
+.video-current-track video {
+    height: 110px;
+    aspect-ratio: auto;
+    width: 240px;
+    object-fit: cover;
+}
+
+.video-current-track {
+    padding: 10px 0;
+}
+
+.video-current-track .audio-track-wrap {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.video-current-track .audio-track-wrap[draggable="true"] {
+    zoom: 0.5;
+}
+
+.video-current-track .audio-track-wrap div {
+    display: flex;
+    // align-items: center;
+}
+
+.video-current-track .audio-track-wrap div label {
+    font-size: 14px;
+    padding: 0 10px;
+    max-width: 200px;
+    margin-bottom: auto;
+}
+.video-current-track .audio-track-wrap div > *:not(label){
+  margin-top: auto;
+}
+
+.video-current-track .audio-track-wrap {
+    position: relative;
+    padding: 20px 30px 20px;
+    z-index: 9;
+}
+
+.video-current-track .audio-track-wrap .track-arrow-btn {
+    display: block !important;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border-radius: unset;
+}
+
+.video-current-track .audio-track-wrap .track-arrow-btn:hover>div {
+    opacity: 1;
+}
+
+.video-current-track .audio-track-wrap .track-arrow-btn>div {
+    width: 20px;
+    height: 20px;
+    background-color: #af5e1b;
+    text-align: center;
+    line-height: 20px;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.video-current-track .audio-track-wrap .track-arrow-btn .track-arrow-btn-up {
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    left: 0;
+}
+
+.video-current-track .audio-track-wrap .track-arrow-btn .track-arrow-btn-down {
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    bottom: -5px;
+}
+
+.video-current-track .audio-track-wrap .track-arrow-btn .track-arrow-btn-left {
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+}
+
+.video-current-track .audio-track-wrap .track-arrow-btn .track-arrow-btn-right {
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.media_wrap {
+    flex-wrap: wrap;
+}
+
+.media_wrap>label {
+    width: 100%;
+}
+
+.video-current-track .audio-track-wrap {
+    min-width: 350px;
+}
+
+.video-current-track .audio-track-wrap > div {
+    justify-content: center;
+    height: 130px;
+}
+
+.video-current-track {
+    min-height: 156px;
+}
+
+.video-track-controls {
+    min-height: 175px;
+}
+
+.video-track-info-wrap, .video-track-details-wrap {
+    background-color: #1d3d59;
+}
+
+.video-track-left-controls {
+    background-color: transparent;
+}
+
+.video-track-left-controls {
+    padding-bottom: 0;
+}
+
+.video-track-details-wrap {
+    padding: 20px;
+}
+
+.video-track-add {
+    background-color: #fe6f42;
+    color: #eae8d8;
+    width: 55px;
+    height: 55px;
+    border-radius: 50px;
+    padding: 0;
+    line-height: 55px;
+    box-shadow: 0 0 7px #0f2d48;
+    margin-top: 20px !important;
+    position: relative;
+    left: 45%;
+    transform: translateX(-50%);
+}
+
+.video-track-controls {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 10px 10px 0;
+}
+
+.video-track-controls .video-track-title {
+    width: 100%;
+    background-color: rgb(253, 185, 58);
+    color: #000;
+    font-weight: 700;
+    border-radius: 13px;
+    margin-bottom: 5px;
+}
+
+.video-track-controls > div:not(.video-track-title) {
+    width: 46%;
+    box-shadow: unset;
+    border-radius: 10px;
+    // padding: 6px 0;
+}
+
+.video-track-controls .video-remove-btn {
+    justify-content: space-evenly;
+}
+
+.video-track-controls .video-remove-btn>div {
+    background-color: rgba(0, 0, 0, 0.18);
+    width: calc(100% - 20px);
+    height: 30px;
+    line-height: 32px;
+    border-radius: 4px;
+    padding: 0;
+    position: relative;
+}
+
+.video-track-controls .video-remove-btn>div input {
+    width: 100%;
+    height: 100%;
+}
+
+.video-track-controls .video-remove-btn>div svg {
+    width: unset !important;
+    font-size: 15px;
+}
+
+.video-timer-btn {
+    background-color: rgb(254, 111, 66);
+    box-shadow: unset;
+    padding: 10px;
+    border: unset;
+    border-radius: 10px 0 0 10px;
+    cursor: pointer;
+    margin-top: 13px;
+}
+
+.video-time-details ul:after {
+    border: unset;
+}
+
+.video-current-time {
+    background-color: rgba(0, 0, 0, 0.302);
+    opacity: unset;
+}
+
+.video-track-details {
+    background-color: #1d3d59;
+}
+
+.video-current-track {
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    border-bottom: 1px solid #636363;
+    padding: 0 15px;
+}
+
+.video-current-track .audio-track-wrap div label {
+    color: #fff;
+    max-width: 100%;
+}
+
+.video-current-track:not(:first-child) {
+    margin-top: 5px;
+}
+
+.video-main-wrap {
+    width: 100%;
+}
+
+.video-timer-wrap {
+    padding: 95px 0 0 0;
+    background-color: #19334a;
+}
+
+.video-timer {
+    background-color: rgba(0, 0, 0, 0.81);
+}
+
+.modal_filed_wrap {
+    max-width: 1240px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.modal_filed {
+    max-width: 19%;
+    width: 100%;
+}
+
+.modal_filed span {
+    display: block;
+    color: #666;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+.modal_filed input {
+    width: -webkit-fill-available;
+    margin: 0;
+    max-width: 100%;
+    display: block;
+    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.1);
+}
+
+.modal_filed button {
+    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    width: 100%;
+}
+
+.video-track-details {
+    overflow: hidden;
+}
+
+.video-track-details .video-track-details-in {
+    overflow-x: auto;
+    background-color: #203548;
+    position: relative;
+}
+
+.video-track-details .progress_wrp {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-track-details .progress_wrp .progress-wrapper {
+    margin: 0;
+    height: 100%;
+    background: transparent;
+}
+
+.video-track-details .progress_wrp>div {
+    height: 100%;
+}
+
+.video-track-details .progress_wrp .progress-wrapper .progress {
+    border-right: 2px solid #fdb93a;
+    background: transparent;
+}
+
+.video-track-details .progress_wrp .progress-wrapper .progress:after {
+    content: "";
+    width: 0;
+    height: 0;
+    display: inline-block;
+    border: 9px solid transparent;
+    border-bottom: none;
+    border-top: 9px solid #fdb93a;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto -10px 0 auto;
+    z-index: 3;
+}
+
+.video-track-details-in::-webkit-scrollbar-track {
+    background-color: rgb(75, 100, 121);
+}
+
+.video-track-details-in::-webkit-scrollbar {
+    height: 6px;
+    background-color: rgb(25, 50, 72);
+}
+
+.video-track-details-in::-webkit-scrollbar-thumb {
+    background-color: rgba(240, 240, 240, 0.541);
+}
+
 //--End video cutter 
-line.video-current-track .audio-track-wrap{max-width:33.33%;flex:0 0 33.33%;width:100%;padding:0 15px;min-height:156px;}
+line.video-current-track .audio-track-wrap {
+    max-width: 33.33%;
+    flex: 0 0 33.33%;
+    width: 100%;
+    padding: 0 15px;
+    min-height: 156px;
+}
 
 </style>
