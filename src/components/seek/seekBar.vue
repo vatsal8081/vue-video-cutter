@@ -76,7 +76,7 @@ export default {
   height: 200px;
   margin: 200px 20px;
   position: relative;
-  background: #e1e1e1;
+  // background: #e1e1e1;
 
   .progress {
     position: absolute;

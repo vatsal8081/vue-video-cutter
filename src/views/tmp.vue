@@ -116,7 +116,7 @@ export default {
 };
 </script>
 <style scoped>
-.buttons {
+/* .buttons {
   margin-top: 35px;
 }
 .row-v {
@@ -126,5 +126,5 @@ export default {
 .ghost {
   opacity: 0.5;
   background: #c8ebfb;
-}
+} */
 </style>
