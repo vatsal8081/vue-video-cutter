@@ -168,54 +168,6 @@
         </div>
       </div>
 
-      <!-- <draggable
-        v-model="rows"
-        tag="div"
-        class="row wrap fill-height align-center sortable-list"
-        style="background: grey"
-      >
-        <div
-          v-for="(data, i) in rows"
-          :key="i"
-          class="sortable"
-          xs12
-          my-2
-          style="background: red"
-        >
-          <draggable
-            :list="data.items"
-            tag="div"
-            :group="{ name: 'row' }"
-            class="row wrap justify-space-around"
-          >
-            <div
-              v-for="(item, index) in data.items"
-              :key="index"
-              xs4
-              pa-3
-              class="row-v"
-            >
-              <div style="height: 100px">{{ item.title }}</div>
-            </div>
-          </draggable>
-        </div>
-      </draggable> -->
-
-      <!-- <p>abcsaoidfhdsfh</p>
-      <draggable v-model="tracksData">
-        <transition-group>
-          <div v-for="(el, i) in tracksData" :key="i">
-            {{ el.title }}
-          </div>
-        </transition-group>
-      </draggable> -->
-      <!-- <xns-seek-bar
-        :bar-color="'#ffdd00'"
-        :current-value="33"
-        :total-value="100"
-        :listen="true"
-      ></xns-seek-bar> -->
-
       <div></div>
     </div>
   </div>
@@ -230,9 +182,8 @@ import audioPlayer from "@/components/media/audio.vue";
 import videoPlayer from "@/components/media/video.vue";
 import { dragscroll } from "vue-dragscroll";
 import seekBar from "../components/seek/seekBar.vue";
-// import draggable from "vuedraggable";
 import draggable from "vuedraggable";
-// audioPlayer, videoPlayer,
+
 export default {
   components: { timeLine, audioPlayer, videoPlayer, seekBar, draggable },
   directives: {
@@ -241,28 +192,6 @@ export default {
 
   data() {
     return {
-      rows: [
-        {
-          index: 1,
-          items: [
-            {
-              title: "item 1",
-            },
-          ],
-        },
-        {
-          index: 2,
-          items: [
-            {
-              title: "item 2",
-            },
-            {
-              title: "item 3",
-            },
-          ],
-        },
-      ],
-
       mediaLastTrackName: {
         audio: 0,
         video: 0,
