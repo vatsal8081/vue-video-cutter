@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="video-main-wrap" v-dragscroll="true">
+    <div class="video-main-wrap">
       <!-- tracks component -->
       <div class="video-track-details-wrap">
         <!-- track left bar -->
@@ -86,7 +86,11 @@
             </div>
             <div class="video-track-details">
               <div class="video-track-details-in">
-                <draggable v-model="tracksData" tag="div">
+                <draggable
+                  v-model="tracksData"
+                  tag="div"
+                  @end="generateTrackTitle"
+                >
                   <div
                     class="video-current-track"
                     v-for="(track, i) in tracksData"
@@ -97,12 +101,20 @@
                       :list="track.medias"
                       tag="div"
                       :group="{ name: 'row' }"
+                      @end="generateTrackTitle"
                     >
                       <div
                         class="audio-track-wrap"
                         v-for="(media, mediaIndex) in track.medias"
                         :key="mediaIndex"
                       >
+                        <!--  experimental -->
+                        <!-- <div style="height: 100px">
+                          {{ media.name }}
+                        </div> -->
+
+                        <!--  experimental -->
+
                         <div class="track-arrow-btn">
                           <div
                             class="track-arrow-btn-up"
@@ -163,6 +175,39 @@
         </div>
       </div>
 
+      <!-- <draggable
+        v-model="rows"
+        tag="div"
+        class="row wrap fill-height align-center sortable-list"
+        style="background: grey"
+      >
+        <div
+          v-for="(data, i) in rows"
+          :key="i"
+          class="sortable"
+          xs12
+          my-2
+          style="background: red"
+        >
+          <draggable
+            :list="data.items"
+            tag="div"
+            :group="{ name: 'row' }"
+            class="row wrap justify-space-around"
+          >
+            <div
+              v-for="(item, index) in data.items"
+              :key="index"
+              xs4
+              pa-3
+              class="row-v"
+            >
+              <div style="height: 100px">{{ item.title }}</div>
+            </div>
+          </draggable>
+        </div>
+      </draggable> -->
+
       <!-- <p>abcsaoidfhdsfh</p>
       <draggable v-model="tracksData">
         <transition-group>
@@ -194,7 +239,7 @@ import { dragscroll } from "vue-dragscroll";
 import seekBar from "../components/seek/seekBar.vue";
 // import draggable from "vuedraggable";
 import draggable from "vuedraggable";
-
+// audioPlayer, videoPlayer,
 export default {
   components: { timeLine, audioPlayer, videoPlayer, seekBar, draggable },
   directives: {
@@ -203,6 +248,28 @@ export default {
 
   data() {
     return {
+      rows: [
+        {
+          index: 1,
+          items: [
+            {
+              title: "item 1",
+            },
+          ],
+        },
+        {
+          index: 2,
+          items: [
+            {
+              title: "item 2",
+            },
+            {
+              title: "item 3",
+            },
+          ],
+        },
+      ],
+
       mediaLastTrackName: {
         audio: 0,
         video: 0,
@@ -226,6 +293,12 @@ export default {
   },
 
   methods: {
+    chnage() {
+      console.log("change1");
+    },
+    change2() {
+      console.log("chnage2");
+    },
     changeInterval() {
       this.interval = { ...this.inputInterval };
       this.isChangingInterval = !this.isChangingInterval;
@@ -586,7 +659,16 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
 .video-track-add svg path {
   fill: #fff;
 }
-.video-current-track {
+// .video-current-track {
+//   // overflow-x: auto;
+//   min-height: 98px;
+//   box-shadow: inset 0 0 2px 0px #c7913b;
+//   // background-color: rgba(255, 255, 255, 0.6);
+//   display: flex;
+//   align-items: center;
+// }
+
+.video-current-track > div {
   // overflow-x: auto;
   min-height: 98px;
   box-shadow: inset 0 0 2px 0px #c7913b;
@@ -1099,4 +1181,8 @@ body .video-swap-btn-wrap .svg-inline--fa.fa-w-10 {
   background-color: rgba(240, 240, 240, 0.541);
 }
 //--End video cutter line
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
+}
 </style>

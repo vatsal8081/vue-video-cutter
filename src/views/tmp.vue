@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-8">
       <h3>Draggable</h3>
       <draggable
@@ -34,9 +34,43 @@
           </draggable>
         </v-flex>
       </draggable>
-    </div>
+    </div> -->
 
-    <!-- <rawDisplayer class="col-3" :value="rows" title="List" /> -->
+  <!-- <rawDisplayer class="col-3" :value="rows" title="List" /> -->
+  <!-- </div> -->
+  <div>
+    <draggable
+      v-model="rows"
+      tag="div"
+      class="row wrap fill-height align-center sortable-list"
+      style="background: grey"
+    >
+      <div
+        v-for="(data, i) in rows"
+        :key="i"
+        class="sortable"
+        xs12
+        my-2
+        style="background: red"
+      >
+        <draggable
+          :list="data.items"
+          tag="div"
+          :group="{ name: 'row' }"
+          class="row wrap justify-space-around"
+        >
+          <div
+            v-for="(item, index) in data.items"
+            :key="index"
+            xs4
+            pa-3
+            class="row-v"
+          >
+            <div style="height: 100px">{{ item.title }}</div>
+          </div>
+        </draggable>
+      </div>
+    </draggable>
   </div>
 </template>
 
