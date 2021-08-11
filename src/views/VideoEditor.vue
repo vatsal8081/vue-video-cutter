@@ -215,12 +215,6 @@ export default {
   },
 
   methods: {
-    chnage() {
-      console.log("change1");
-    },
-    change2() {
-      console.log("chnage2");
-    },
     changeInterval() {
       this.interval = { ...this.inputInterval };
       this.isChangingInterval = !this.isChangingInterval;
